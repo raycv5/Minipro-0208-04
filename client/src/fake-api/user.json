@@ -1,3 +1,13 @@
 {
-   "events": [{}]
+  "events": [
+    {
+      "name": "ageng",
+      "email": "dims@gmail.com",
+      "password": "asd123",
+      "country": "Indonesia",
+      "province": "jateng",
+      "city": "bandung",
+      "id": 1
+    }
+  ]
 }

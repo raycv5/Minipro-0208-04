@@ -1,3 +1,4 @@
+
 import EventHeader from "../components/EventHeader";
 import HowItWorks from "../components/HowItWorks";
 import { Navbar } from "../components/Navbar";
