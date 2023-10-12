@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { setData } from "./redux/event";
 import axios from "axios";
 import { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import { EventPage } from "./pages/EventPage";
 function App() {
    const dispatch = useDispatch();
    const id = localStorage.getItem("id");
@@ -19,7 +21,13 @@ function App() {
    useEffect(() => {
       keepLogin();
    }, []);
-   return <HomePage />;
+
+   return (
+      <Routes>
+         <Route path="/" element={<HomePage />}></Route>
+         <Route path="/joinwithus" element={<EventPage />}></Route>
+      </Routes>
+   );
 }
 
 export default App;

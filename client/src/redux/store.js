@@ -3,6 +3,6 @@ import { eventSlice } from "./event";
 
 export const store = configureStore({
    reducer: {
-      event: eventSlice,
+      events: eventSlice,
    },
 });

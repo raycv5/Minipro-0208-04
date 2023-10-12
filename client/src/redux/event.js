@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 export const eventSlice = createSlice({
-   name: "event",
+   name: "events",
    initialState: {
-      value: {},
+      value: [],
    },
    reducers: {
       setData: (state, action) => {
