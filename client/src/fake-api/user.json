@@ -8,6 +8,15 @@
       "province": "jateng",
       "city": "bandung",
       "id": 1
+    },
+    {
+      "name": "Lutpi",
+      "email": "testing@gmail.com",
+      "password": "123123",
+      "country": "Turkiye",
+      "province": "Istanbul",
+      "city": "Istanbul",
+      "id": 2
     }
   ]
 }

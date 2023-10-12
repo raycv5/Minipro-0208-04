@@ -26,7 +26,9 @@ function EventHeader() {
             curation! As an Event Organizer, you have the power to shape
             experiences and create memories that last a lifetime.
           </Text>
-          <Button width="180px">Apply now</Button>
+          <Button as={"a"} href="/register/organizer" width="180px">
+            Apply now
+          </Button>
         </Stack>
         <Box flex="1" textAlign="right" maxWidth="lg">
           <Image
