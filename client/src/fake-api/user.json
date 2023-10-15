@@ -17,6 +17,15 @@
       "province": "Istanbul",
       "city": "Istanbul",
       "id": 2
+    },
+    {
+      "name": "dims",
+      "email": "dims@gmail.com",
+      "password": "asd123",
+      "country": "Indonesia",
+      "province": "Jawa Barat",
+      "city": "Bandung",
+      "id": 3
     }
   ]
 }
