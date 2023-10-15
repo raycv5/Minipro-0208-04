@@ -34,7 +34,7 @@ const registSchema = Yup.object().shape({
     .required("Please enter a valid country"),
   city: Yup.string()
     .matches(/^[a-zA-Z\s]+$/, "Invalid city name")
-    .required("Please enter a valid country"),
+    .required("Please enter a city country"),
 });
 
 export const OrganizerRegisterPage = () => {
@@ -185,7 +185,9 @@ export const OrganizerRegisterPage = () => {
                           }}
                           align={"start"}
                           justify={"space-between"}
+
                         ></Stack>
+
                         <Button
                           type="submit"
                           bg={"blue.400"}
@@ -194,7 +196,9 @@ export const OrganizerRegisterPage = () => {
                             bg: "blue.500",
                           }}
                         >
+
                           Register
+
                         </Button>
                       </Stack>
                     </Stack>
