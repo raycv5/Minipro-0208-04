@@ -65,13 +65,11 @@ const NAV_ITEMS = [
 ];
 
 export const Navbar = () => {
-
-   const { isOpen, onToggle } = useDisclosure();
-   const navigate = useNavigate();
-   const handleEvent = () => {
-      navigate("/joinwithus");
-   };
-
+  const { isOpen, onToggle } = useDisclosure();
+  const navigate = useNavigate();
+  const handleEvent = () => {
+    navigate("/joinwithus");
+  };
 
   return (
     <Box>
@@ -115,37 +113,36 @@ export const Navbar = () => {
           </Flex>
         </Flex>
 
-
-            <Stack
-               flex={{ base: 1, md: 0 }}
-               justify={"flex-end"}
-               direction={"row"}
-               spacing={6}>
-               <Button
-                  as={"a"}
-                  fontSize={"sm"}
-                  fontWeight={400}
-                  variant={"link"}
-                  href={"#"}>
-                  Sign In
-               </Button>
-               <Button
-                  onClick={handleEvent}
-                  as={"a"}
-                  display={{ base: "none", md: "inline-flex" }}
-                  fontSize={"sm"}
-                  fontWeight={600}
-                  color={"white"}
-                  bg={"pink.400"}
-                  href={"#"}
-                  _hover={{
-                     bg: "pink.300",
-                  }}>
-                  Sign Up
-               </Button>
-            </Stack>
-         </Flex>
-
+        <Stack
+          flex={{ base: 1, md: 0 }}
+          justify={"flex-end"}
+          direction={"row"}
+          spacing={6}
+        >
+          <Button
+            as={"a"}
+            fontSize={"sm"}
+            fontWeight={400}
+            variant={"link"}
+          >
+            Sign In
+          </Button>
+          <Button
+            onClick={handleEvent}
+            as={"a"}
+            display={{ base: "none", md: "inline-flex" }}
+            fontSize={"sm"}
+            fontWeight={600}
+            color={"white"}
+            bg={"pink.400"}
+            _hover={{
+              bg: "pink.300",
+            }}
+          >
+            Sign Up
+          </Button>
+        </Stack>
+      </Flex>
 
       <Collapse in={isOpen} animateOpacity>
         <MobileNav />
