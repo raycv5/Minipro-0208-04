@@ -1,14 +1,20 @@
 import { HomePage } from "./pages/HomePage";
 import { useDispatch } from "react-redux";
 import { setData } from "./redux/event";
+import { login } from "./redux/userSlice"
 import axios from "axios";
 import { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import EventPage from "./pages/EventPage";
 import { OrganizerRegisterPage } from "./pages/OrganizerRegisterPage";
+import UserDashboard from "./pages/userDashboardPage";
+import UserRegister from "./pages/userRegisterPage";
+
+
 function App() {
   const dispatch = useDispatch();
   const id = localStorage.getItem("id");
+  const Navigate = useNavigate();
 
   const keepLogin = async () => {
     try {
@@ -23,6 +29,19 @@ function App() {
     keepLogin();
   }, []);
 
+  const keepLoginUser = async () => {
+    try {
+      const response = await axios.get(`http://localhost:2000/users/${id}`);
+      dispatch(login(response.data));
+      console.log(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    keepLoginUser();
+  }, [dispatch]);
+
   return (
     <Routes>
       <Route path="/" element={<HomePage />}></Route>
@@ -31,6 +50,8 @@ function App() {
         path="/register/organizer"
         element={<OrganizerRegisterPage />}
       ></Route>
+      <Route path="/userRegister" element={ <UserRegister/> } />
+      <Route path="/userDashboard" element={ id? <UserDashboard/> : <Navigate to="/" />} />
     </Routes>
   );
 }

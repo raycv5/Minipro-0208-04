@@ -13,14 +13,15 @@ import {
 export const Register = () => {
    const { isOpen, onOpen, onClose } = useDisclosure();
    return (
-      <>
+        <>  
+
          <Button
             onClick={onOpen}
             as={"a"}
             fontSize={"sm"}
             fontWeight={400}
             variant={"link"}
-            href={"#"}>
+            href="href=/userRegister">
             Register
          </Button>
 

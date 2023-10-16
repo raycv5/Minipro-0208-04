@@ -14,7 +14,7 @@ import {
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
-} from "@chakra-ui/react";
+  } from "@chakra-ui/react";
 import {
   HamburgerIcon,
   CloseIcon,
@@ -22,6 +22,9 @@ import {
   ChevronRightIcon,
 } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
+import UserLogin from "./UserLogin";
+import { useSelector } from "react-redux";
+
 
 const NAV_ITEMS = [
   {
@@ -65,8 +68,9 @@ const NAV_ITEMS = [
 ];
 
 export const Navbar = () => {
-
-   const { isOpen, onToggle } = useDisclosure();
+  const user = useSelector((state) => state.user)
+  
+  const { isOpen, onToggle } = useDisclosure();
    const navigate = useNavigate();
    const handleEvent = () => {
       navigate("/joinwithus");
@@ -121,14 +125,15 @@ export const Navbar = () => {
                justify={"flex-end"}
                direction={"row"}
                spacing={6}>
-               <Button
+                                <Button
                   as={"a"}
                   fontSize={"sm"}
                   fontWeight={400}
                   variant={"link"}
-                  href={"#"}>
-                  Sign In
-               </Button>
+                  href="/userRegister">
+                  Register
+               </Button> 
+               <UserLogin/>
                <Button
                   onClick={handleEvent}
                   as={"a"}
@@ -145,7 +150,6 @@ export const Navbar = () => {
                </Button>
             </Stack>
          </Flex>
-
 
       <Collapse in={isOpen} animateOpacity>
         <MobileNav />

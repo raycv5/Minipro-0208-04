@@ -1,0 +1,44 @@
+{
+  "events": [
+    {
+      "name": "ageng",
+      "email": "dims@gmail.com",
+      "password": "asd123",
+      "country": "Indonesia",
+      "province": "jateng",
+      "city": "bandung",
+      "id": 1
+    },
+    {
+      "name": "lutpi",
+      "email": "testing@gmail.com",
+      "password": "123123",
+      "country": "Turkiye",
+      "province": "Istanbul",
+      "city": "Istanbul",
+      "id": 2
+    }
+  ],
+  "users": [
+    {
+      "name": "Agna Nasution",
+      "email": "agna@mail.com",
+      "country": "Indonesia",
+      "province": "JawaBarat",
+      "city": "Indonesia",
+      "password": "Asdasd",
+      "referralCode": "045MGEfb",
+      "id": 2
+    },
+    {
+      "name": "Aman Hutabarat",
+      "email": "aman@mail.com",
+      "country": "Indonesia",
+      "province": "JawaBarat",
+      "city": "Bandung",
+      "password": "Asdasd",
+      "referralCode": "C7gJgCoe",
+      "id": 3
+    }
+  ]
+}
