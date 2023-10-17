@@ -22,6 +22,7 @@ import {
   ChevronRightIcon,
 } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
+import UserLogin from "./UserLogin";
 
 const NAV_ITEMS = [
   {
@@ -118,15 +119,16 @@ export const Navbar = () => {
           justify={"flex-end"}
           direction={"row"}
           spacing={6}
-        >
+          >
           <Button
             as={"a"}
             fontSize={"sm"}
             fontWeight={400}
             variant={"link"}
-          >
-            Sign In
-          </Button>
+            href="/userRegister">
+            Register
+          </Button> 
+          <UserLogin/>  
           <Button
             onClick={handleEvent}
             as={"a"}
