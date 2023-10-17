@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import EventPage from "./pages/EventPage";
 import { OrganizerRegisterPage } from "./pages/OrganizerRegisterPage";
+import { OrganizerDashboardPage } from "./pages/OrganizerDashboardPage";
 function App() {
   const dispatch = useDispatch();
   const id = localStorage.getItem("id");
@@ -31,6 +32,7 @@ function App() {
         path="/register/organizer"
         element={<OrganizerRegisterPage />}
       ></Route>
+      <Route path="/buildyourpage" element={<OrganizerDashboardPage />}></Route>
     </Routes>
   );
 }

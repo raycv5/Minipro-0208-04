@@ -14,6 +14,7 @@ import {
   Text,
   InputRightElement,
   InputGroup,
+  Grid,
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useState } from "react";
@@ -72,15 +73,15 @@ export const OrganizerRegisterPage = () => {
               minH={"100vh"}
               align={"center"}
               justify={"center"}
-              bg={"gray.800"}
+              bg={"white"}
             >
               <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
                 <Stack align={"center"}>
                   <Heading fontSize={"4xl"}>Sign in to your account</Heading>
                 </Stack>
                 <Form>
-                  <Box rounded={"lg"} bg={"gray.700"} boxShadow={"lg"} p={8}>
-                    <Stack spacing={4}>
+                  <Box rounded={"lg"} bg={"white"} boxShadow={"lg"} p={8}>
+                    <Grid templateColumns="repeat(2, 1fr)" gap={"25px"}>
                       <FormControl id="name">
                         <FormLabel>Name</FormLabel>
                         <Input
@@ -177,30 +178,27 @@ export const OrganizerRegisterPage = () => {
                           style={{ color: "red" }}
                         />
                       </FormControl>
-                      <Stack spacing={10}>
-                        <Stack
-                          direction={{
-                            base: "column",
-                            sm: "row",
-                          }}
-                          align={"start"}
-                          justify={"space-between"}
+                    </Grid>
+                    <Stack spacing={10}>
+                      <Stack
+                        direction={{
+                          base: "column", 
+                          sm: "row",
+                        }}
+                        align={"start"}
+                        justify={"space-between"}
+                      ></Stack>
 
-                        ></Stack>
-
-                        <Button
-                          type="submit"
-                          bg={"blue.400"}
-                          color={"white"}
-                          _hover={{
-                            bg: "blue.500",
-                          }}
-                        >
-
-                          Register
-
-                        </Button>
-                      </Stack>
+                      <Button
+                        type="submit"
+                        bg={"blue.400"}
+                        color={"white"}
+                        _hover={{
+                          bg: "blue.500",
+                        }}
+                      >
+                        Register
+                      </Button>
                     </Stack>
                   </Box>
                 </Form>
