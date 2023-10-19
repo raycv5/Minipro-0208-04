@@ -22,7 +22,7 @@ import {
    ChevronRightIcon,
 } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
-import UserLogin from "./UserLogin";
+import { EventLogin } from "./EventLogin";
 
 const NAV_ITEMS = [
    {
@@ -65,11 +65,11 @@ const NAV_ITEMS = [
    },
 ];
 
-export const Navbar = () => {
+export const NavbarEvent = () => {
    const { isOpen, onToggle } = useDisclosure();
    const navigate = useNavigate();
    const handleEvent = () => {
-      navigate("/joinwithus");
+      navigate("/register/organizer");
    };
 
    return (
@@ -120,17 +120,9 @@ export const Navbar = () => {
                justify={"flex-end"}
                direction={"row"}
                spacing={6}>
-               <UserLogin />
+               <EventLogin />
                <Button
-                  as={"a"}
-                  fontSize={"sm"}
-                  fontWeight={400}
-                  variant={"link"}
-                  href="/userRegister">
-                  Register
-               </Button>
-               <Button
-                  cursor={"pointer"}
+               cursor={"pointer"}
                   onClick={handleEvent}
                   as={"a"}
                   display={{ base: "none", md: "inline-flex" }}

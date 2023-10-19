@@ -1,4 +1,4 @@
-import Header from "../assets/images/event-header.png";
+import Header from '../../assets/images/event-header.png'
 import {
   Box,
   Button,

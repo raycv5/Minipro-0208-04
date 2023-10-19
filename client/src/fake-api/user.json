@@ -3,7 +3,7 @@
     {
       "name": "ageng",
       "email": "dims@gmail.com",
-      "password": "asd123",
+      "password": "Asd123",
       "country": "Indonesia",
       "province": "jateng",
       "city": "bandung",
@@ -26,6 +26,24 @@
       "province": "Jawa Barat",
       "city": "Bandung",
       "id": 3
+    },
+    {
+      "name": "aman hidayat",
+      "email": "amanhidayat@gmail.com",
+      "password": "Asd123",
+      "country": "Indonesia",
+      "province": "Jawa Barat",
+      "city": "Bandung",
+      "id": 4
+    },
+    {
+      "name": "dadang",
+      "email": "dadang@gmail.com",
+      "password": "Asd123",
+      "country": "Indonesia",
+      "province": "Jawa Barat",
+      "city": "Bandung",
+      "id": 5
     }
   ],
   "users": [
