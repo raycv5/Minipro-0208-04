@@ -14,12 +14,16 @@ import {
    Flex,
    FormLabel,
    Text,
+   InputRightElement,
    useToast,
+   InputGroup,
 } from "@chakra-ui/react";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 const LoginSchema = Yup.object().shape({
    email: Yup.string()
@@ -27,11 +31,12 @@ const LoginSchema = Yup.object().shape({
       .required("*Email is required"),
    password: Yup.string()
       .matches(/^(?=.*[A-Z])/, "*Your password or email is not match...!")
-      .min(5, "Password must be in 5 characters at minimum")
+      .min(3, "Password must be in 5 characters at minimum")
       .required("*Password is required"),
 });
 
-const UserLogin = () => {
+export const EventLogin = () => {
+   const [showPassword, setShowPassword] = useState(false);
    const { isOpen, onOpen, onClose } = useDisclosure();
    const navigate = useNavigate();
    const toast = useToast();
@@ -39,7 +44,7 @@ const UserLogin = () => {
    const handleSubmit = async (data) => {
       try {
          const response = await axios.get(
-            `http://localhost:2000/users?email=${data.email}&password=${data.password}`
+            `http://localhost:2000/events?email=${data.email}&password=${data.password}`
          );
          console.log("Response from JSON server:", response.data);
 
@@ -50,14 +55,21 @@ const UserLogin = () => {
                title: "success",
                description: "Your are Login..!!",
                status: "success",
-               duration: "5000",
-               position: "bottom",
+               duration: 5000,
+               position: "top-left",
                isClosable: true,
             });
-            navigate("/userDashboard");
+            navigate("/buildyourpage");
             window.location.reload();
          } else {
-            alert("Account not found");
+            toast({
+               title: "Error",
+               description: "Account not defined.",
+               status: "error",
+               duration: 3000,
+               position: "top-left",
+               isClosable: true,
+            });
          }
       } catch (err) {
          console.log(err);
@@ -67,7 +79,6 @@ const UserLogin = () => {
    return (
       <>
          <Button
-            variant={"link"}
             onClick={onOpen}
             fontSize={"sm"}
             fontWeight={200}
@@ -75,6 +86,7 @@ const UserLogin = () => {
             _hover={{ textDecoration: "underline" }}>
             Login
          </Button>
+
          <Modal isOpen={isOpen} onClose={onClose} isCentered size={"sm"}>
             <ModalOverlay />
 
@@ -88,12 +100,11 @@ const UserLogin = () => {
                   onClose();
                }}>
                {(formitprops) => {
-                  // console.log(props)
                   return (
                      <Form>
                         <ModalContent
                            boxShadow={"2px 2px 20px rgba(0, 0, 0, 0.9)"}>
-                           <ModalHeader>User Login</ModalHeader>
+                           <ModalHeader>Organizer Login</ModalHeader>
                            <ModalCloseButton />
 
                            <ModalBody>
@@ -115,12 +126,33 @@ const UserLogin = () => {
 
                                  <FormControl>
                                     <FormLabel>Password</FormLabel>
-                                    <Input
-                                       as={Field}
-                                       type="password"
-                                       name="password"
-                                       bg={"gray.100"}
-                                    />
+                                    <InputGroup>
+                                       <Input
+                                          as={Field}
+                                          type={
+                                             showPassword ? "text" : "password"
+                                          }
+                                          name="password"
+                                          bg={"gray.100"}
+                                          autoComplete="off"
+                                       />
+                                       <InputRightElement>
+                                          <Button
+                                             variant={"ghost"}
+                                             onClick={() =>
+                                                setShowPassword(
+                                                   (showPassword) =>
+                                                      !showPassword
+                                                )
+                                             }>
+                                             {showPassword ? (
+                                                <ViewIcon />
+                                             ) : (
+                                                <ViewOffIcon />
+                                             )}
+                                          </Button>
+                                       </InputRightElement>
+                                    </InputGroup>
                                     <ErrorMessage
                                        component="div"
                                        name="password"
@@ -135,33 +167,38 @@ const UserLogin = () => {
                                  w={"100%"}
                                  gap={"60px"}>
                                  <Button
-                                    bg={"gray.700"}
+                                 _hover={{
+                                    bg:"green.300"
+                                 }}
+                                    bg={"green.400"}
                                     color={"whiteAlpha.800"}
                                     onClick={() => {
-                                       if (
-                                          window.confirm(
-                                             "Are you sure want to cancel?"
-                                          )
-                                       )
-                                          navigate("/");
+                                       navigate("/");
                                        onClose();
                                     }}>
                                     Cancel
                                  </Button>
 
                                  <Button
-                                    bg={"gray.700"}
+                                 _hover={{
+                                    bg:"green.300"
+                                 }}
+                                    bg={"green.400"}
                                     color={"whiteAlpha.800"}
                                     type="submit">
                                     Login
                                  </Button>
                               </Flex>
                            </ModalFooter>
-                           <Flex gap={"10px"} justifyContent={"center"} alignItems={"center"}>
-                              <Text >
-                                 Login for organizer?
-                              </Text>
-                              <Text as={"a"} href="/joinwithus" textDecoration={"underline"}>
+                           <Flex
+                              gap={"10px"}
+                              justifyContent={"center"}
+                              alignItems={"center"}>
+                              <Text>Login for user?</Text>
+                              <Text
+                                 as={"a"}
+                                 href="/"
+                                 textDecoration={"underline"}>
                                  Login
                               </Text>
                            </Flex>
@@ -174,5 +211,3 @@ const UserLogin = () => {
       </>
    );
 };
-
-export default UserLogin;

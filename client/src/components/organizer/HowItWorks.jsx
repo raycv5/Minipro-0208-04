@@ -14,7 +14,7 @@ function HowItWorks() {
             <Text fontSize="lg" fontWeight="bold">
               Create Your Event
             </Text>
-            <Text>
+            <Text> 
               Sign up and effortlessly craft your event with our user-friendly
               interface. Showcase the unique details that make your event stand
               out.
