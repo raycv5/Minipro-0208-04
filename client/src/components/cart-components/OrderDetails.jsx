@@ -11,23 +11,25 @@ import {
 } from "@chakra-ui/react";
 import { PhoneIcon } from "@chakra-ui/icons";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function OrderDetails() {
+  const users = useSelector((state) => state.user.value);
+
   const [user, setUser] = useState({
-    name: "Rayhan",
-    email: "rayhan@gmail.com",
-    phone: 123456789,
+    name: "",
+    email: "",
+    phone: "",
   });
 
-  const [value, setValue] = useState("");
   const [usePersonalInfo, setUsePersonalInfo] = useState(false);
 
   const handleCheckChange = (e) => {
     setUsePersonalInfo(e.target.checked);
-  };
-
-  const handleChange = (e) => {
-    setValue(e.target.value);
+    if (e.target.checked) {
+      setUser({ name: users.name, email: users.email, phone: user.phone });
+      console.log(user);
+    }
   };
 
   return (
@@ -54,7 +56,7 @@ function OrderDetails() {
               <FormLabel>Full Name</FormLabel>
               <Input
                 type="text"
-                value={usePersonalInfo ? user.name : ""}
+                value={usePersonalInfo ? users.name : user.name}
                 onChange={(e) => setUser({ ...user, name: e.target.value })}
                 isDisabled={usePersonalInfo}
               />
@@ -64,22 +66,25 @@ function OrderDetails() {
               <FormLabel>Email</FormLabel>
               <Input
                 type="email"
-                value={usePersonalInfo ? user.email : ""}
+                value={usePersonalInfo ? users.email : user.email}
                 onChange={(e) => setUser({ ...user, email: e.target.value })}
                 disabled={usePersonalInfo}
               />
             </Box>
             <Box>
-              <FormLabel>Phone Number</FormLabel>
+              <FormLabel>
+                Phone Number{" "}
+                <Text as="span" fontWeight="thin">
+                  (optional)
+                </Text>{" "}
+              </FormLabel>
               <InputGroup>
                 <InputLeftElement pointerEvents="none">
                   <PhoneIcon color="gray.300" />
                 </InputLeftElement>
                 <Input
                   type="tel"
-                  value={usePersonalInfo ? user.phone : ""}
                   onChange={(e) => setUser({ ...user, phone: e.target.value })}
-                  isDisabled={usePersonalInfo}
                 />
               </InputGroup>
             </Box>
