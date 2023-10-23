@@ -17,7 +17,6 @@ import * as Yup from "yup"
 import axios from "axios"
 import { useEffect, useState } from "react";
 
-
 const testimonials = [
   {
     id: 1,
@@ -68,6 +67,12 @@ const UserRegister = () => {
   const [activeIndex, setActiveIndex] = useState(0)
   const navigate = useNavigate()
   const toast = useToast();
+  const formatDate = (date) => {
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -92,10 +97,15 @@ const UserRegister = () => {
 
   const handleSubmit = async(data) => {
     const referralCode = CodeGenerator(8)
-    console.log(referralCode)
-    const userCode = {...data, referralCode }  
+    const currentDate = formatDate(new Date())
+    const userCode = {
+      ...data, 
+      referralCode,
+      points: 20,
+      "date-join" : currentDate,
+    }  
     try{
-      const response = await axios.post("http://localhost:2000/users", userCode)
+      await axios.post("http://localhost:2000/users", userCode)
       navigate("/")
     } catch(err) {
       console.log(err)

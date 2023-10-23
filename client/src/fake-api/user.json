@@ -48,34 +48,40 @@
   ],
   "users": [
     {
-      "name": "Agna Nasution",
+      "name": "Aman H",
+      "email": "aman@mail.com",
+      "country": "Indonesia",
+      "province": "Jawa-Barat",
+      "city": "Palembang",
+      "password": "Asdasd",
+      "referralCode": "KvfdFRnt",
+      "points": 20,
+      "date-join": "22-10-2023",
+      "id": 1
+    },
+    {
+      "name": "Agna N",
       "email": "agna@mail.com",
       "country": "Indonesia",
-      "province": "JawaBarat",
+      "province": "Jawa-Barat",
       "city": "Indonesia",
       "password": "Asdasd",
-      "referralCode": "045MGEfb",
+      "referralCode": "bHoAzOJZ",
+      "points": 20,
+      "date-join": "22-10-2023",
       "id": 2
     },
     {
-      "name": "Aman Hutabarat",
-      "email": "aman@mail.com",
-      "country": "Indonesia",
-      "province": "JawaBarat",
-      "city": "Bandung",
-      "password": "Asdasd",
-      "referralCode": "C7gJgCoe",
-      "id": 3
-    },
-    {
-      "name": "user01",
-      "email": "user01@mail.com",
+      "name": "Andi L",
+      "email": "andi@mail.com",
       "country": "Indonesia",
       "province": "Jawa-Barat",
       "city": "Bandung",
       "password": "Asdasd",
-      "referralCode": "AMVc1wyI",
-      "id": 4
+      "referralCode": "zrROo25i",
+      "points": 80,
+      "date-join": "22-10-2023",
+      "id": 3
     }
   ]
 }

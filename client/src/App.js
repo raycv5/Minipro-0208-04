@@ -11,6 +11,9 @@ import { OrganizerDashboardPage } from "./pages/OrganizerDashboardPage";
 import UserDashboard from "./pages/userDashboardPage";
 import UserRegister from "./pages/userRegisterPage";
 import CartPage from "./pages/CartPage";
+import SendCode from "./components/dashboard-component/SendcodeContent";
+import ReferralContent from "./components/dashboard-component/ReferralContent";
+import UserEvent from "./components/dashboard-component/UserEventContent";
 
 function App() {
   const dispatch = useDispatch();
@@ -61,6 +64,25 @@ function App() {
         path="/userDashboard"
         element={id ? <UserDashboard /> : <Navigate to="/" />}
       />
+       <Route
+            path = "/send-code" 
+            element ={<SendCode />}
+         ></Route>
+         <Route 
+            path="/welcome-user"
+            element= { <UserDashboard/>}
+            >   
+            </Route>
+         <Route 
+            path="/referral-content"
+            element= { <ReferralContent/>}
+            >   
+         </Route>
+         <Route 
+            path="/user-event"
+            element= { <UserEvent/>}
+            >   
+         </Route>
     </Routes>
   );
 }

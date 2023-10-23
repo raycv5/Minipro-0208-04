@@ -6,7 +6,6 @@ import {
 } from "@chakra-ui/react";
 import { PiTicketFill } from "react-icons/pi"
 import { MdAttachEmail, MdEventNote } from "react-icons/md"
-import { Link } from "react-router-dom";
 
 const Sidebar = () => {
 
@@ -15,7 +14,7 @@ const Sidebar = () => {
     gap : "10px",
     cursor: "pointer",
     p: "5px",
-    _hover: { bg : "gray.600", color: "white" }
+    _hover: { bg : "blue.300", color: "white" }
   }
 
   return (  
