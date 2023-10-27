@@ -4,8 +4,20 @@ import PriceDetails from "../components/cart-components/PriceDetails";
 import OrderDetails from "../components/cart-components/OrderDetails";
 import PaymentMethods from "../components/cart-components/PaymentMethods";
 import BuyButton from "../components/cart-components/BuyButton";
+import { useState } from "react";
 
 function CartPage() {
+  const [data, setData] = useState({
+    date: "",
+    event_id: "",
+    event_name: "",
+    user_id: "",
+    user_name: "",
+    payment_method: 0,
+    discount: 0,
+    isSuccess: false,
+  });
+
   return (
     <Box bgColor={{ base: "gray.200", lg: "white" }} padding={{ lg: "3% 12%" }}>
       <Text
