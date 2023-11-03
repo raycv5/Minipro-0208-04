@@ -1,5 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
+const { Ticket } = require("./ticket");
+
 module.exports = (sequelize, DataTypes) => {
   class Transaction extends Model {
     /**
@@ -21,13 +23,21 @@ module.exports = (sequelize, DataTypes) => {
     {
       initial_price: DataTypes.INTEGER,
       total_price: DataTypes.INTEGER,
-      transaction_date: DataTypes.DATE,
-      status: DataTypes.INTEGER,
+      promotion_code: DataTypes.STRING,
     },
     {
       sequelize,
       modelName: "Transaction",
     }
   );
+
+  Transaction.afterCreate(async (transaction) => {
+    const ticket = await sequelize.models.Ticket.create({
+      UserId: transaction.UserId,
+      EventId: transaction.EventId,
+      TransactionId: transaction.id,
+    });
+  });
+
   return Transaction;
 };
