@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   Point_Discount.init(
     {
       point_cost: DataTypes.INTEGER,
-      discount: DataTypes.INTEGER,
+      discount: DataTypes.STRING,
     },
     {
       sequelize,

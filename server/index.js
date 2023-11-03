@@ -13,6 +13,34 @@ app.get("/api", (req, res) => {
   }
 });
 
+const {
+  countryRouter,
+  cityRouter,
+  userRouter,
+  referralRouter,
+  walletRouter,
+  categoryRouter,
+  organizerRouter,
+  paymentRouter,
+  pointRouter,
+  eventRouter,
+  transactionRouter,
+  promotionRouter,
+} = require("./routers");
+
+app.use("/users", userRouter);
+app.use("/countries", countryRouter);
+app.use("/cities", cityRouter);
+app.use("/wallets", walletRouter);
+app.use("/referrals", referralRouter);
+app.use("/categories", categoryRouter);
+app.use("/organizers", organizerRouter);
+app.use("/payment-methods", paymentRouter);
+app.use("/point-discounts", pointRouter);
+app.use("/events", eventRouter);
+app.use("/transactions", transactionRouter);
+app.use("/promotions", promotionRouter);
+
 app.listen(PORT, () => {
   // db.sequelize.sync({ alter: true });
   console.log(`Server running on PORT ${PORT}`);
