@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const { Organizer_Wallet } = require("./organizer_wallet");
 module.exports = (sequelize, DataTypes) => {
   class Organizer extends Model {
     /**
@@ -43,5 +44,13 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "Organizer",
     }
   );
+
+  Organizer.afterCreate(async (organizer) => {
+    const organizer_wallet = await sequelize.models.Organizer_Wallet.create({
+      OrganizerId: organizer.id,
+      balance: 0,
+    });
+  });
+
   return Organizer;
 };
