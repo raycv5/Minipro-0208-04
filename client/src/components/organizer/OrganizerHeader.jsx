@@ -22,7 +22,7 @@ function EventHeader() {
             Your Gateway to Event Excellence
           </Heading>
           <Text fontSize="lg">
-            Welcome to [PLATFORM_NAME], where we celebrate the art of event
+            Welcome to Dofun, where we celebrate the art of event
             curation! As an Event Organizer, you have the power to shape
             experiences and create memories that last a lifetime.
           </Text>

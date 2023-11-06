@@ -1,15 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-export const eventSlice = createSlice({
+
+export const eventsSlice = createSlice({
    name: "events",
    initialState: {
       value: [],
    },
    reducers: {
-      setData: (state, action) => {
+      eventsData: (state, action) => {
          state.value = action.payload;
       },
    },
 });
 
-export const { setData } = eventSlice.actions;
-export default eventSlice.reducer;
+export const { eventsData } = eventsSlice.actions;
+export default eventsSlice.reducer;
