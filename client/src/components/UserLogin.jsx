@@ -15,6 +15,10 @@ import {
    FormLabel,
    Text,
    useToast,
+   Tabs,
+   TabList,
+   Tab,
+   TabPanels,
 } from "@chakra-ui/react";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -157,11 +161,15 @@ const UserLogin = () => {
                                  </Button>
                               </Flex>
                            </ModalFooter>
-                           <Flex gap={"10px"} justifyContent={"center"} alignItems={"center"}>
-                              <Text >
-                                 Login for organizer?
-                              </Text>
-                              <Text as={"a"} href="/joinwithus" textDecoration={"underline"}>
+                           <Flex
+                              gap={"10px"}
+                              justifyContent={"center"}
+                              alignItems={"center"}>
+                              <Text>Login for organizer?</Text>
+                              <Text
+                                 as={"a"}
+                                 href="/joinwithus"
+                                 textDecoration={"underline"}>
                                  Login
                               </Text>
                            </Flex>

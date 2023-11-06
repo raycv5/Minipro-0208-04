@@ -2,6 +2,7 @@ const db = require("../models");
 const City = db.City;
 
 module.exports = {
+
   add: async (req, res) => {
     try {
       await City.create(req.body);
@@ -20,4 +21,5 @@ module.exports = {
       res.status(400).send({ message: err.message });
     }
   },
+
 };

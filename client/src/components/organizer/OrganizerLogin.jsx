@@ -44,13 +44,10 @@ export const EventLogin = () => {
    const handleSubmit = async (data) => {
       try {
          const response = await axios.get(
-            `http://localhost:2000/events?email=${data.email}&password=${data.password}`
+            `http://localhost:2000/organizers/login?email=${data.email}&password=${data.password}`
          );
-         console.log("Response from JSON server:", response.data);
-
-         if (response.data[0]?.id) {
-            // dispatch(setData(response.data[0]));
-            localStorage.setItem("id", response.data[0]?.id);
+         if (response.data.token) {
+            localStorage.setItem("token", response.data.token);
             toast({
                title: "success",
                description: "Your are Login..!!",
@@ -64,7 +61,7 @@ export const EventLogin = () => {
          } else {
             toast({
                title: "Error",
-               description: "Account not defined.",
+               description: "Account not found.",
                status: "error",
                duration: 3000,
                position: "top-left",
@@ -79,6 +76,7 @@ export const EventLogin = () => {
    return (
       <>
          <Button
+            variant={"link"}
             onClick={onOpen}
             fontSize={"sm"}
             fontWeight={200}
@@ -99,7 +97,7 @@ export const EventLogin = () => {
                   action.resetForm();
                   onClose();
                }}>
-               {(formitprops) => {
+               {({ isSubmitting }) => {
                   return (
                      <Form>
                         <ModalContent
@@ -167,9 +165,9 @@ export const EventLogin = () => {
                                  w={"100%"}
                                  gap={"60px"}>
                                  <Button
-                                 _hover={{
-                                    bg:"green.300"
-                                 }}
+                                    _hover={{
+                                       bg: "green.300",
+                                    }}
                                     bg={"green.400"}
                                     color={"whiteAlpha.800"}
                                     onClick={() => {
@@ -180,13 +178,14 @@ export const EventLogin = () => {
                                  </Button>
 
                                  <Button
-                                 _hover={{
-                                    bg:"green.300"
-                                 }}
+                                    _hover={{
+                                       bg: "green.300",
+                                    }}
                                     bg={"green.400"}
                                     color={"whiteAlpha.800"}
-                                    type="submit">
-                                    Login
+                                    type={isSubmitting ? "button" : "submit"}
+                                    isLoading={isSubmitting}>
+                                    {isSubmitting ? "Loading.." : "Login"}
                                  </Button>
                               </Flex>
                            </ModalFooter>

@@ -1,49 +1,83 @@
 {
-  "events": [
+  "organizer": [
     {
-      "name": "ageng",
-      "email": "dims@gmail.com",
-      "password": "Asd123",
+      "name": "andre",
+      "email": "andre@gmail.com",
+      "password": "Andre123",
       "country": "Indonesia",
-      "province": "jateng",
-      "city": "bandung",
+      "province": "Jawa Barat",
+      "city": "Bandung",
       "id": 1
     },
     {
-      "name": "Lutpi",
-      "email": "testing@gmail.com",
-      "password": "123123",
-      "country": "Turkiye",
-      "province": "Istanbul",
-      "city": "Istanbul",
+      "name": "agna",
+      "email": "agna@gmail.com",
+      "password": "Agna123",
+      "country": "Indonesia",
+      "province": "Jawa Barat",
+      "city": "Bandung",
       "id": 2
     },
     {
-      "name": "dims",
-      "email": "dims@gmail.com",
-      "password": "asd123",
+      "name": "aman",
+      "email": "aman@gmail.com",
+      "password": "Aman123",
       "country": "Indonesia",
       "province": "Jawa Barat",
       "city": "Bandung",
       "id": 3
+    }
+  ],
+  "events": [
+    {
+      "eventName": "test 1 event",
+      "category": "sport",
+      "date": "2023-11-01T18:41",
+      "country": "Indonesia",
+      "city": "Bandung",
+      "description": "INI EVENT AMAN",
+      "ticket": "3",
+      "image": "https://media.tacdn.com/media/attractions-content--1x-1/0c/11/5c/fc.jpg",
+      "price": 0,
+      "id": 1
     },
     {
-      "name": "aman hidayat",
-      "email": "amanhidayat@gmail.com",
-      "password": "Asd123",
+      "eventName": "test",
+      "category": "Entertainment",
+      "date": "2023-11-04T22:07",
       "country": "Indonesia",
-      "province": "Jawa Barat",
       "city": "Bandung",
+      "description": "iniEvent aman",
+      "ticket": "2",
+      "image": "",
+      "price": 0,
+      "id": 2
+    },
+    {
+      "eventName": "test",
+      "category": "sport",
+      "date": "2023-11-01T13:49",
+      "country": "Indonesia",
+      "city": "Bandung",
+      "description": "testtttt",
+      "ticket": "2",
+      "image": "C:\\fakepath\\WhatsApp Image 2023-10-24 at 09.11.49.jpeg",
+      "price": 20000,
+      "promotion": 1500,
+      "id": 3
+    },
+    {
+      "eventName": "events",
+      "category": "sport",
+      "date": "2023-11-01T09:10",
+      "country": "Indonesia",
+      "city": "Bandung",
+      "description": "testt",
+      "ticket": "10",
+      "image": "C:\\fakepath\\WhatsApp Image 2023-10-24 at 09.11.49.jpeg",
+      "price": 0,
+      "promotion": 0,
       "id": 4
-    },
-    {
-      "name": "dadang",
-      "email": "dadang@gmail.com",
-      "password": "Asd123",
-      "country": "Indonesia",
-      "province": "Jawa Barat",
-      "city": "Bandung",
-      "id": 5
     }
   ],
   "users": [

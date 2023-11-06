@@ -1,3 +1,4 @@
+
 const db = require("../models");
 const Country = db.Country;
 const City = db.City;
@@ -28,4 +29,5 @@ module.exports = {
       res.status(400).send({ message: err.message });
     }
   },
+
 };

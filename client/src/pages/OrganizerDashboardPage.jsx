@@ -1,5 +1,4 @@
-import { EventDashboard } from "../components/dashboard-event/EventDashboard";
-
+import { DashboardOrganizer } from "../components/organizer-dashboard/OrganizerDashboard";
 export const OrganizerDashboardPage = () => {
-   return <EventDashboard />;
+   return <DashboardOrganizer />;
 };

@@ -22,48 +22,9 @@ import {
    ChevronRightIcon,
 } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
-import { EventLogin } from "./EventLogin";
+import { EventLogin } from "./OrganizerLogin";
 
-const NAV_ITEMS = [
-   {
-      label: "Inspiration",
-      children: [
-         {
-            label: "Explore Design Work",
-            subLabel: "Trending Design to inspire you",
-            href: "#",
-         },
-         {
-            label: "New & Noteworthy",
-            subLabel: "Up-and-coming Designers",
-            href: "#",
-         },
-      ],
-   },
-   {
-      label: "Find Work",
-      children: [
-         {
-            label: "Job Board",
-            subLabel: "Find your dream design job",
-            href: "#",
-         },
-         {
-            label: "Freelance Projects",
-            subLabel: "An exclusive list for contract work",
-            href: "#",
-         },
-      ],
-   },
-   {
-      label: "Learn Design",
-      href: "#",
-   },
-   {
-      label: "Hire Designers",
-      href: "#",
-   },
-];
+const NAV_ITEMS = [];
 
 export const NavbarEvent = () => {
    const { isOpen, onToggle } = useDisclosure();
@@ -104,12 +65,15 @@ export const NavbarEvent = () => {
             </Flex>
             <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
                <Text
+                  as={"a"}
+                  href="/"
                   textAlign={useBreakpointValue({ base: "center", md: "left" })}
                   fontFamily={"heading"}
-                  color={useColorModeValue("gray.800", "white")}>
-                  Logo
+                  textColor="green.400"
+                  fontWeight="bold"
+                  fontSize="lg">
+                  dofun.
                </Text>
-
                <Flex display={{ base: "none", md: "flex" }} ml={10}>
                   <DesktopNav />
                </Flex>
@@ -122,7 +86,7 @@ export const NavbarEvent = () => {
                spacing={6}>
                <EventLogin />
                <Button
-               cursor={"pointer"}
+                  cursor={"pointer"}
                   onClick={handleEvent}
                   as={"a"}
                   display={{ base: "none", md: "inline-flex" }}

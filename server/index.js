@@ -1,16 +1,20 @@
 const express = require("express");
 const PORT = 2000;
 const db = require("./models");
+const cors = require("cors");
 
 const app = express();
 app.use(express.json());
+app.use("/public", express.static("./public"));
+
+app.use(cors());
 
 app.get("/api", (req, res) => {
-  try {
-    res.status(200).send(`API TEST`);
-  } catch (err) {
-    console.log(err);
-  }
+   try {
+      res.status(200).send(`API TEST`);
+   } catch (err) {
+      console.log(err);
+   }
 });
 
 const {
@@ -33,7 +37,7 @@ app.use("/countries", countryRouter);
 app.use("/cities", cityRouter);
 app.use("/wallets", walletRouter);
 app.use("/referrals", referralRouter);
-app.use("/categories", categoryRouter);
+app.use("/category", categoryRouter);
 app.use("/organizers", organizerRouter);
 app.use("/payment-methods", paymentRouter);
 app.use("/point-discounts", pointRouter);
@@ -42,6 +46,6 @@ app.use("/transactions", transactionRouter);
 app.use("/promotions", promotionRouter);
 
 app.listen(PORT, () => {
-  // db.sequelize.sync({ alter: true });
-  console.log(`Server running on PORT ${PORT}`);
+   //  db.sequelize.sync({ alter: true });
+   console.log(`Server running on PORT ${PORT}`);
 });

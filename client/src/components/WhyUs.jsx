@@ -1,7 +1,10 @@
 import { Box, Flex, Stack, Text } from "@chakra-ui/react";
 import { RiSecurePaymentLine } from "react-icons/ri";
+import { useSelector } from "react-redux";
 
 function WhyUs() {
+  const events = useSelector(state => state.events.value)
+  console.log(events)
   return (
     <Box padding="5% 12%" bgColor="gray.100">
       <Flex
