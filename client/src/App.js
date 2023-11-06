@@ -21,111 +21,114 @@ import { categoryData } from "./redux/categorySlice";
 import { eventsData } from "./redux/eventSlice";
 
 function App() {
-   const dispatch = useDispatch();
-   const id = localStorage.getItem("id");
-   const Navigate = useNavigate();
-   const token = localStorage.getItem("token");
-   console.log(token);
-   const getCountry = async () => {
-      try {
-         const country = await axios.get(`http://localhost:2000/country`);
-         dispatch(countryData(country.data));
-      } catch (error) {
-         console.log(error);
-      }
-   };
+  const dispatch = useDispatch();
+  const Navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
-   const getCategory = async () => {
-      try {
-         const category = await axios.get(`http://localhost:2000/category`);
-         dispatch(categoryData(category.data));
-      } catch (error) {
-         console.log(error);
-      }
-   };
+  const getCountry = async () => {
+    try {
+      const country = await axios.get(`http://localhost:2000/countries`);
+      dispatch(countryData(country.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-   const getEvent = async () => {
-      try {
-         const events = await axios.get(`http://localhost:2000/events`);
-         dispatch(eventsData(events.data.event));
-      } catch (error) {
-         console.log(error);
-      }
-   };
+  const getCategory = async () => {
+    try {
+      const category = await axios.get(`http://localhost:2000/category`);
+      dispatch(categoryData(category.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-   const getCity = async () => {
-      try {
-         const city = await axios.get(`http://localhost:2000/city`);
-         dispatch(cityData(city.data));
-      } catch (error) {
-         console.log(error);
-      }
-   };
+  const getEvent = async () => {
+    try {
+      const events = await axios.get(`http://localhost:2000/events`);
+      dispatch(eventsData(events.data.event));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-   const keepLogin = async () => {
-      try {
-         const response = await axios.get(
-            `http://localhost:2000/organizers/keep-login`,
-            {
-               headers: {
-                  Authorization: `Bearer ${token}`,
-               },
-            }
-         );
-         dispatch(setData(response.data.result));
-      } catch (err) {
-         console.log(err);
-      }
-   };
-   useEffect(() => {
-      keepLogin();
-      getCity();
-      getCountry();
-      getCategory();
-      getEvent();
-   }, []);
+  const getCity = async () => {
+    try {
+      const city = await axios.get(`http://localhost:2000/cities`);
+      dispatch(cityData(city.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-   const keepLoginUser = async () => {
-      try {
-         const response = await axios.get(`http://localhost:2000/users/${id}`);
-         dispatch(login(response.data));
-      } catch (err) {
-         console.log(err);
-      }
-   };
-   useEffect(() => {
-      keepLoginUser();
-   }, [dispatch]);
+  const keepLogin = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:2000/organizers/keep-login`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(setData(response.data.result));
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-   return (
-      <Routes>
-         <Route path="/" element={<HomePage />}></Route>
-         <Route path="/joinwithus" element={<EventPage />}></Route>
-         <Route path="/cart" element={<CartPage />}></Route>{" "}
-         <Route
-            path="/register/organizer"
-            element={<OrganizerRegisterPage />}></Route>
-         <Route
-            path="/buildyourpage"
-            element={
-               token ? (
-                  <OrganizerDashboardPage />
-               ) : (
-                  <Navigate to="/joinwithus" />
-               )
-            }></Route>
-         <Route path="/userRegister" element={<UserRegister />} />
-         <Route
-            path="/userDashboard"
-            element={id ? <UserDashboard /> : <Navigate to="/" />}
-         />
-         <Route path="/discovery" element={<DiscoveryPage />}></Route>
-         <Route path="/send-code" element={<SendCode />}></Route>
-         <Route path="/welcome-user" element={<UserDashboard />}></Route>
-         <Route path="/referral-content" element={<ReferralContent />}></Route>
-         <Route path="/user-event" element={<UserEvent />}></Route>
-      </Routes>
-   );
+  const keepLoginUser = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:2000/users/keep-login`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(login(response.data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    keepLogin();
+    getCity();
+    getCountry();
+    getCategory();
+    getEvent();
+    keepLoginUser();
+  }, []);
+
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />}></Route>
+      <Route path="/joinwithus" element={<EventPage />}></Route>
+      <Route path="/cart" element={<CartPage />}></Route>{" "}
+      <Route
+        path="/register/organizer"
+        element={<OrganizerRegisterPage />}
+      ></Route>
+      <Route
+        path="/buildyourpage"
+        element={
+          token ? <OrganizerDashboardPage /> : <Navigate to="/joinwithus" />
+        }
+      ></Route>
+      <Route path="/userRegister" element={<UserRegister />} />
+      <Route
+        path="/userDashboard"
+        element={token ? <UserDashboard /> : <Navigate to="/" />}
+      />
+      <Route path="/discovery" element={<DiscoveryPage />}></Route>
+      <Route path="/send-code" element={<SendCode />}></Route>
+      <Route path="/welcome-user" element={<UserDashboard />}></Route>
+      <Route path="/referral-content" element={<ReferralContent />}></Route>
+      <Route path="/user-event" element={<UserEvent />}></Route>
+    </Routes>
+  );
 }
 
 export default App;

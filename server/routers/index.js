@@ -1,8 +1,6 @@
-
 const countryRouter = require("./countryRouter");
 const cityRouter = require("./cityRouter");
 const userRouter = require("./userRouter");
-const referralRouter = require("./referralRouter");
 const walletRouter = require("./walletRouter");
 const categoryRouter = require("./categoryRouter");
 const organizerRouter = require("./organizerRouter");
@@ -16,7 +14,6 @@ module.exports = {
   countryRouter,
   cityRouter,
   userRouter,
-  referralRouter,
   walletRouter,
   categoryRouter,
   organizerRouter,
