@@ -1,13 +1,28 @@
-const organizerRouter = require("./organizerRouter");
+
 const countryRouter = require("./countryRouter");
 const cityRouter = require("./cityRouter");
-const eventRouter = require("./eventRouter");
+const userRouter = require("./userRouter");
+const referralRouter = require("./referralRouter");
+const walletRouter = require("./walletRouter");
 const categoryRouter = require("./categoryRouter");
+const organizerRouter = require("./organizerRouter");
+const paymentRouter = require("./paymentRouter");
+const pointRouter = require("./pointRouter");
+const eventRouter = require("./eventRouter");
+const transactionRouter = require("./transactionRouter");
+const promotionRouter = require("./promotionRouter");
 
 module.exports = {
-   organizerRouter,
-   countryRouter,
-   cityRouter,
-   eventRouter,
-   categoryRouter,
+  countryRouter,
+  cityRouter,
+  userRouter,
+  referralRouter,
+  walletRouter,
+  categoryRouter,
+  organizerRouter,
+  paymentRouter,
+  pointRouter,
+  eventRouter,
+  transactionRouter,
+  promotionRouter,
 };

@@ -2,6 +2,7 @@ const db = require("../models");
 const Category = db.Category;
 
 module.exports = {
+
    getCategory: async (req, res) => {
       try {
          const category = await Category.findAll();
@@ -20,4 +21,5 @@ module.exports = {
          res.status(400).send({ message: error.message });
       }
    },
+
 };
