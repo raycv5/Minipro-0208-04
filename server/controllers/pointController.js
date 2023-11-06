@@ -2,6 +2,16 @@ const db = require("../models");
 const Point_Discount = db.Point_Discount;
 
 module.exports = {
+  getAll: async (req, res) => {
+    try {
+      const response = await Point_Discount.findAll();
+      res.status(200).send(response);
+    } catch (err) {
+      console.log(err);
+      res.status(400).send({ message: err.message });
+    }
+  },
+
   add: async (req, res) => {
     try {
       Point_Discount.create(req.body);

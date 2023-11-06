@@ -1,5 +1,6 @@
 import { Box, Flex, Stack, Text } from "@chakra-ui/react";
 import { RiSecurePaymentLine } from "react-icons/ri";
+import { AiOutlineGlobal, AiTwotoneCalendar } from "react-icons/ai";
 
 function WhyUs() {
   return (
@@ -13,10 +14,22 @@ function WhyUs() {
       >
         <Stack width="xs" padding="5">
           <Text alignSelf="center">
-            <RiSecurePaymentLine size="40" />
+            <AiOutlineGlobal size="40" />
           </Text>
           <Text fontSize="xl" fontWeight="bold">
-            Secure Transaction
+            Global Exposure
+          </Text>
+          <Text>
+            Expand globally! Showcase events to a diverse audience. Elevate your
+            experiences and gain international acclaim effortlessly with dofun
+          </Text>
+        </Stack>
+        <Stack width="xs" padding="5">
+          <Text alignSelf="center">
+            <AiTwotoneCalendar size="40" />
+          </Text>
+          <Text fontSize="xl" fontWeight="bold">
+            Effortless Management
           </Text>
           <Text>
             Rest easy knowing that all transactions are secure. Our robust
@@ -32,22 +45,9 @@ function WhyUs() {
             Secure Transaction
           </Text>
           <Text>
-            Rest easy knowing that all transactions are secure. Our robust
-            payment system ensures that you receive timely payments without any
-            hassle.
-          </Text>
-        </Stack>
-        <Stack width="xs" padding="5">
-          <Text alignSelf="center">
-            <RiSecurePaymentLine size="40" />
-          </Text>
-          <Text fontSize="xl" fontWeight="bold">
-            Secure Transaction
-          </Text>
-          <Text>
-            Rest easy knowing that all transactions are secure. Our robust
-            payment system ensures that you receive timely payments without any
-            hassle.
+            Enjoy peace of mind – our secure transaction system ensures
+            hassle-free, timely payments, backed by robust security for
+            worry-free transactions
           </Text>
         </Stack>
       </Flex>

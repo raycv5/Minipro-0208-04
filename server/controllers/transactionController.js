@@ -146,7 +146,11 @@ module.exports = {
         },
       });
 
-      if (promotion && promotion.EventId === EventId) {
+      if (
+        promotion &&
+        promotion.EventId === EventId &&
+        promotion.status === 0
+      ) {
         return res.status(200).send(promotion);
       }
 

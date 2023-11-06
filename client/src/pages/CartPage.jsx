@@ -8,15 +8,24 @@ import { useState } from "react";
 
 function CartPage() {
   const [data, setData] = useState({
-    date: "",
-    event_id: "",
-    event_name: "",
-    user_id: "",
-    user_name: "",
-    payment_method: 0,
-    discount: 0,
-    isSuccess: false,
+    initial_price: 0,
+    EventId: 0,
+    UserId: 0,
+    promotion_code: "",
+    PaymentMethodId: 1,
+    PointDiscountId: 0,
+    PromotionCodeId: 0,
   });
+
+  const handlePaymentMethod = (paymentMethodId) => {
+    setData((prevData) => ({ ...prevData, PaymentMethodId: paymentMethodId }));
+  };
+
+  const handlePromotionCode = (promotionCode) => {
+    setData((prevData) => ({ ...prevData, promotion_code: promotionCode }));
+  };
+
+  console.log(data);
 
   return (
     <Box bgColor={{ base: "gray.200", lg: "white" }} padding={{ lg: "3% 12%" }}>
@@ -40,10 +49,10 @@ function CartPage() {
         <Box flex={{ lg: 1 }}>
           <EventDetail />
           <OrderDetails />
-          <PaymentMethods />
+          <PaymentMethods onPaymentChange={handlePaymentMethod} />
         </Box>
         <Box flex={{ lg: 1 }} maxWidth={{ lg: "md" }}>
-          <PriceDetails />
+          <PriceDetails onCodeChange={handlePromotionCode} />
           <BuyButton />
         </Box>
       </Flex>

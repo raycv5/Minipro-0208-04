@@ -1,9 +1,11 @@
 const express = require("express");
 const PORT = 2000;
 const db = require("./models");
+const cors = require("cors");
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.get("/api", (req, res) => {
   try {
@@ -17,13 +19,13 @@ const {
   countryRouter,
   cityRouter,
   userRouter,
-  referralRouter,
+  // referralRouter,
   walletRouter,
   categoryRouter,
-  organizerRouter,
+  // organizerRouter,
   paymentRouter,
   pointRouter,
-  eventRouter,
+  // eventRouter,
   transactionRouter,
   promotionRouter,
 } = require("./routers");
@@ -32,12 +34,12 @@ app.use("/users", userRouter);
 app.use("/countries", countryRouter);
 app.use("/cities", cityRouter);
 app.use("/wallets", walletRouter);
-app.use("/referrals", referralRouter);
+// app.use("/referrals", referralRouter);
 app.use("/categories", categoryRouter);
-app.use("/organizers", organizerRouter);
+// app.use("/organizers", organizerRouter);
 app.use("/payment-methods", paymentRouter);
 app.use("/point-discounts", pointRouter);
-app.use("/events", eventRouter);
+// app.use("/events", eventRouter);
 app.use("/transactions", transactionRouter);
 app.use("/promotions", promotionRouter);
 
