@@ -111,7 +111,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<HomePage />}></Route>
+      <Route path="/homepage" element={<HomePage />}></Route>
       <Route path="/joinwithus" element={<EventPage />}></Route>
       <Route path="/cart" element={<CartPage />}></Route>{" "}
       <Route
@@ -134,7 +134,7 @@ function App() {
         element={token ? <UserDashboard /> : <Navigate to="/" />}
       />
       <Route
-        path="/discovery"
+        path="/"
         element={
           <DiscoveryPage
             isLoad={isLoad}

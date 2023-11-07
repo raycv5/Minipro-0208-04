@@ -120,172 +120,196 @@ const UserRegister = () => {
    }) 
   }
 
-  return (    
-      <Flex> 
-      <Flex flex={1} flexDir={"column"} bg={"gray.700"} minH={"100vh"} color={"white"}>        
-        <Text 
-        fontSize={40} 
-        textAlign={"center"} 
-        mt={"20px"}
-        mb={"40px"}
-        >EventGILLA
-        </Text>
-        
-        <Flex justifyContent={"center"}>
-        <Box w={"75%"}>
-        <Image
-        src={activeTestimonial.img}
-        />
-        </Box>
+  return (
+     <Flex>
+        <Flex
+           flex={1}
+           flexDir={"column"}
+           bg={"gray.700"}
+           minH={"100vh"}
+           color={"white"}>
+           <Heading
+              textColor="green.400"
+              textAlign={"center"}
+              fontSize={{ base: "xl", md: "3xl" }}
+              m={"0px 0 20px 0"}>
+              Dofun
+           </Heading>
+
+           <Flex justifyContent={"center"}>
+              <Box w={"75%"}>
+                 <Image src={activeTestimonial.img} />
+              </Box>
+           </Flex>
+
+           <Text
+              fontSize={"18px"}
+              fontWeight={400}
+              textAlign="center"
+              mt={"15px"}
+              ml={"30px"}
+              mr={"30px"}>
+              {activeTestimonial.message}
+           </Text>
+
+           <Text mt={"160px"} textAlign={"center"} fontSize={"18px"}>
+              We are a trusted website throughout the world
+           </Text>
+
         </Flex>
 
-        <Text 
-        fontSize={"18px"} 
-        fontWeight={400} 
-        textAlign="center" 
-        mt={"15px"} 
-        ml={"30px"}
-        mr={"30px"}>
-        {activeTestimonial.message}
-        </Text>
+        <Flex flex={2} justifyContent={"center"}>
+           <Formik
+              initialValues={{
+                 name: "",
+                 email: "",
+                 country: "",
+                 province: "",
+                 city: "",
+                 password: "",
+              }}
+              validationSchema={RegisterSchema}
+              onSubmit={(values, action) => {
+                 console.log(values);
+                 handleSubmit(values);
+                 action.resetForm();
+              }}>
+              {(formitProps) => {
+                 //console.log(formitProps)
+                 return (
+                    <Form>
+                       <Flex
+                          w={"450px"}
+                          flexDir={"column"}
+                          my={"2vh"}
+                          mx={"auto"}
+                          gap={"10px"}
+                          p={"30px"}
+                          borderRadius={"15px"}>
+                          <Heading>
+                             <Text textAlign={"center"}>Sign Up</Text>
+                          </Heading>
 
-        <Text
-        mt={"160px"}
-        textAlign={"center"}
-        fontSize={"18px"}
-        >We are a trusted website throughout the world</Text>
-       
-        <Flex 
-          flexDir={"row"} 
-          mb={"15px"}
-          justifyContent={"center"}
-          alignItems={"center"}
-          gap={"20px"}
-          mt={"10px"}
-          >
-          
-          <Box w={"20%"}>
-          <Image src="http://getdrawings.com/vectors/porsche-logo-vector-29.png"/>
-          </Box>
-          <Box w={"20%"}>
-          <Image src="https://pluspng.com/img-png/subway-logo-eps-png-subway-logo-vector-842.png"/>
-          </Box>
-          <Box w={"20%"}>
-          <Image src="http://3.bp.blogspot.com/-rtT5zrvH2JA/VKUF5PGQbAI/AAAAAAAAA-A/-YvfuktWlDg/w1200-h630-p-k-no-nu/logo%2Bgaruda%2Bindonesia.png"/>
-          </Box>
-          </Flex>
-      </Flex>
+                          <FormControl>
+                             <FormLabel>Name*</FormLabel>
+                             <Input
+                                as={Field}
+                                type="text"
+                                name="name"
+                                bg={"white"}
+                                borderColor={"gray.300"}
+                             />
+                             <ErrorMessage
+                                component="div"
+                                name="name"
+                                style={{ color: "red" }}
+                             />
+                          </FormControl>
 
-        <Flex flex={2} justifyContent={"center"}>  
-          <Formik
-            initialValues={{
-              name: "",
-              email: "",
-              country: "",
-              province: "",
-              city: "",
-              password: "",
-            }}
-            validationSchema= {RegisterSchema}
-            onSubmit={(values, action) => {
-              console.log(values)  
-              handleSubmit(values);
-              action.resetForm();
-            }}
-          >
-          {(formitProps) => {
-            //console.log(formitProps)
-            return(
-            
-              <Form>  
-                <Flex 
-                  w={'450px'} 
-                  flexDir={'column'} 
-                  my={'2vh'} 
-                  mx={'auto'} 
-                  gap={'10px'} 
-                  p={'30px'} 
-                  borderRadius={'15px'} 
-                  >
-                    
-                <Heading><Text textAlign={'center'}>Sign Up</Text></Heading>      
-              
-                <FormControl>
-                  <FormLabel>Name*</FormLabel>
-                  <Input as={Field} type="text" name="name" bg={'white'} borderColor={"gray.300"}/>
-                  <ErrorMessage
-                    component= "div"
-                    name= "name"
-                    style = {{ color : "red"}}
-                  />
-                </FormControl>  
-                
-                <FormControl>
-                  <FormLabel>Email*</FormLabel>
-                  <Input as= {Field} type="text" name="email" bg={'white'} borderColor={"gray.300"}/> 
-                  <ErrorMessage
-                    component= "div"
-                    name= "email"
-                    style = {{ color : "red"}}
-                  />
-                </FormControl>
+                          <FormControl>
+                             <FormLabel>Email*</FormLabel>
+                             <Input
+                                as={Field}
+                                type="text"
+                                name="email"
+                                bg={"white"}
+                                borderColor={"gray.300"}
+                             />
+                             <ErrorMessage
+                                component="div"
+                                name="email"
+                                style={{ color: "red" }}
+                             />
+                          </FormControl>
 
-                <FormControl>
-                  <FormLabel>Country*</FormLabel>
-                  <Input as= {Field} type="text" name="country" bg={'white'} borderColor={"gray.300"}/>
-                  <ErrorMessage
-                    component= "div"
-                    name= "country"
-                    style = {{ color : "red"}}
-                  />
-                </FormControl>
+                          <FormControl>
+                             <FormLabel>Country*</FormLabel>
+                             <Input
+                                as={Field}
+                                type="text"
+                                name="country"
+                                bg={"white"}
+                                borderColor={"gray.300"}
+                             />
+                             <ErrorMessage
+                                component="div"
+                                name="country"
+                                style={{ color: "red" }}
+                             />
+                          </FormControl>
 
-                <FormControl>
-                  <FormLabel>Province*</FormLabel>
-                  <Input as= {Field} type="text" name="province" bg={'white'} borderColor={"gray.300"}/>
-                  <ErrorMessage
-                    component= "div"
-                    name= "province"
-                    style = {{ color : "red"}}
-                  />
-                </FormControl>
+                          <FormControl>
+                             <FormLabel>Province*</FormLabel>
+                             <Input
+                                as={Field}
+                                type="text"
+                                name="province"
+                                bg={"white"}
+                                borderColor={"gray.300"}
+                             />
+                             <ErrorMessage
+                                component="div"
+                                name="province"
+                                style={{ color: "red" }}
+                             />
+                          </FormControl>
 
-                
-                <FormControl>
-                  <FormLabel>City*</FormLabel>
-                  <Input as= {Field} type="text" name="city" bg={'white'} borderColor={"gray.300"}/>
-                  <ErrorMessage
-                    component= "div"
-                    name= "city"
-                    style = {{ color : "red"}}
-                  />
-                </FormControl>
-                  
-                <FormControl> 
-                  <FormLabel> Create Password*</FormLabel>
-                  <Input as={Field} type="password" name="password" bg={'white'} mb={'10px'} borderColor={"gray.300"}/>   
-                  <ErrorMessage
-                    component= "div"
-                    name= "password"
-                    style = {{ color : "red"}}
-                  />
-                </FormControl>  
+                          <FormControl>
+                             <FormLabel>City*</FormLabel>
+                             <Input
+                                as={Field}
+                                type="text"
+                                name="city"
+                                bg={"white"}
+                                borderColor={"gray.300"}
+                             />
+                             <ErrorMessage
+                                component="div"
+                                name="city"
+                                style={{ color: "red" }}
+                             />
+                          </FormControl>
 
-                <Button type="submit" color={'white'} bg={'gray.700'} w={'40%'} _hover={{ bg: 'teal.600' }} ml={'120px'} >SUBMIT</Button>
-                
-                <Flex gap={'5px'} justifyContent={'center'}>
-                <Text>Already have acccount?</Text>
-                <Link to='#'><Text color={'blue.400'}>login</Text></Link>
-                </Flex>
-                  
-                </Flex>
-            
-            </Form>
-            )
-          }}
-          </Formik>   
-          </Flex>
+                          <FormControl>
+                             <FormLabel> Create Password*</FormLabel>
+                             <Input
+                                as={Field}
+                                type="password"
+                                name="password"
+                                bg={"white"}
+                                mb={"10px"}
+                                borderColor={"gray.300"}
+                             />
+                             <ErrorMessage
+                                component="div"
+                                name="password"
+                                style={{ color: "red" }}
+                             />
+                          </FormControl>
+
+                          <Button
+                             type="submit"
+                             color={"white"}
+                             bg={"gray.700"}
+                             w={"40%"}
+                             _hover={{ bg: "teal.600" }}
+                             ml={"120px"}>
+                             SUBMIT
+                          </Button>
+
+                          <Flex gap={"5px"} justifyContent={"center"}>
+                             <Text>Already have acccount?</Text>
+                             <Link to="#">
+                                <Text color={"blue.400"}>login</Text>
+                             </Link>
+                          </Flex>
+                       </Flex>
+                    </Form>
+                 );
+              }}
+           </Formik>
         </Flex>
+     </Flex>
   );
 }
  
