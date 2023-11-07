@@ -27,6 +27,8 @@ function PriceDetails({ onCodeChange, onPointPromotionChange }) {
   const user = useSelector((state) => state.user.value);
   const toast = useToast();
 
+  console.log(user);
+
   const getPointDiscount = async () => {
     const response = await axios.get("http://localhost:2000/point-discounts");
     setPointDiscount(response.data);
@@ -49,7 +51,7 @@ function PriceDetails({ onCodeChange, onPointPromotionChange }) {
   };
 
   const checkPromoCode = async () => {
-    const data = { promotion_code: promoCode, EventId: 1 };
+    const data = { promotion_code: promoCode, EventId: event.id };
 
     try {
       const response = await axios.post(
@@ -103,11 +105,21 @@ function PriceDetails({ onCodeChange, onPointPromotionChange }) {
       </Text>
       <Flex justifyContent="space-between">
         <Text>Subtotal</Text>
-        <Text>Rp.{event.price}</Text>
+        <Text>
+          {event.price.toLocaleString("id-ID", {
+            style: "currency",
+            currency: "IDR",
+          })}
+        </Text>
       </Flex>
       <Flex justifyContent="space-between" fontWeight="thin" color="gray.400">
         <Text>Discount</Text>
-        <Text>Rp.{price - event.price}</Text>
+        <Text>
+          {(price - event.price).toLocaleString("id-ID", {
+            style: "currency",
+            currency: "IDR",
+          })}
+        </Text>
       </Flex>
       <Flex
         justifyContent="space-between"
@@ -118,7 +130,12 @@ function PriceDetails({ onCodeChange, onPointPromotionChange }) {
         paddingY="10px"
       >
         <Text>Total</Text>
-        <Text>Rp.{price}</Text>
+        <Text>
+          {price.toLocaleString("id-ID", {
+            style: "currency",
+            currency: "IDR",
+          })}
+        </Text>
       </Flex>
 
       <Box marginBottom="10px">

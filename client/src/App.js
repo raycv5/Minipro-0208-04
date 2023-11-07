@@ -26,7 +26,6 @@ function App() {
   const token = localStorage.getItem("token");
   const Navigate = useNavigate();
   const organizerToken = localStorage.getItem("organizerToken");
-  console.log(organizerToken);
 
   const [isLoad, setIsLoad] = useState(true);
 

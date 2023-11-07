@@ -117,6 +117,19 @@ module.exports = {
         }
       );
 
+      const eventTicket = event.dataValues.amount - 1;
+
+      await Event.update(
+        {
+          amount: eventTicket,
+        },
+        {
+          where: {
+            id: event.dataValues.id,
+          },
+        }
+      );
+
       await Transaction.create({
         initial_price: event.dataValues.price,
         total_price: price,

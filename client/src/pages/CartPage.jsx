@@ -8,10 +8,12 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useToast } from "@chakra-ui/react";
 
 function CartPage() {
   const user = useSelector((state) => state.user.value);
   const event = useSelector((state) => state.checkout.value);
+  const toast = useToast();
 
   console.log(event);
 
@@ -61,7 +63,14 @@ function CartPage() {
   const handleSubmit = async () => {
     try {
       await axios.post("http://localhost:2000/transactions", transaction);
+      // window.location.reload();
       navigate("/user-event");
+      toast({
+        title: "Ticket bought",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
     } catch (err) {
       console.log(err);
     }
