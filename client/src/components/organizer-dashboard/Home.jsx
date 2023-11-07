@@ -3,10 +3,7 @@ import { useToast } from "@chakra-ui/react";
 
 import {
   Box,
-  SimpleGrid,
-  Icon,
   Text,
-  Stack,
   Flex,
   Heading,
   Button,
@@ -15,7 +12,6 @@ import {
   ModalContent,
   ModalHeader,
   ModalFooter,
-  ModalBody,
   ModalCloseButton,
   useDisclosure,
   Input,

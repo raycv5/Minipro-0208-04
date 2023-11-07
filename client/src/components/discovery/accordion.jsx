@@ -44,8 +44,8 @@ export const AccordionDiscover = ({
                rounded="lg"
                defaultIndex={[1, 2]}>
                <AccordionItem>
-                  <AccordionButton>
-                     <Text onClick={handleReset}>Reset Filter</Text>
+                  <AccordionButton onClick={handleReset}>
+                     <Text>Reset Filter</Text>
                   </AccordionButton>
                </AccordionItem>
                <AccordionItem>

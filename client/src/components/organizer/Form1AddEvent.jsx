@@ -176,7 +176,7 @@ export const Form1 = ({
             {/* Form amout */}
             <FormControl isRequired>
                <FormLabel>Ticket Amount</FormLabel>
-               <NumberInput max={10} min={1}>
+               <NumberInput max={100} min={1}>
                   <NumberInputField
                      placeholder="Min: 1"
                      color={"gray.500"}

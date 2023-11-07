@@ -9,5 +9,6 @@ router.get("/:id", eventController.getById);
 router.get("/category/:id", eventController.getByCategory);
 router.get("/country/:id", eventController.getByCountry);
 router.get("/organizer/:id", eventController.getByOrganizerId);
+router.get("/count-event/:id", eventController.getCountEventByOrganizer);
 
 module.exports = router;
