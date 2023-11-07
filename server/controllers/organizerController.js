@@ -63,13 +63,14 @@ module.exports = {
             return res.status(404).send({ message: "Incorect Password" });
          }
          const payload = { id: isOrganizerExist.id };
-         const token = jwt.sign(payload, "MINIPROJECT_DATABASE", {
-            expiresIn: "10h",
+         const organizerToken = jwt.sign(payload, "TOKEN_ORGANIZER", {
+            expiresIn: "5h",
          });
+         console.log(organizerToken);
          res.status(200).send({
             message: "Login Success",
             result: isOrganizerExist,
-            token,
+            organizerToken,
          });
       } catch (error) {
          res.status(400).send({ message: error.message });

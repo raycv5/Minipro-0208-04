@@ -15,6 +15,7 @@ import {
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { SearchLocation } from "./Search";
 import { CheckBoxEvent } from "./Checkbox";
+import { useNavigate } from "react-router-dom";
 
 export const AccordionDiscover = ({
    category,
@@ -24,6 +25,11 @@ export const AccordionDiscover = ({
    value,
    displayedLocation,
 }) => {
+   const navigate = useNavigate();
+   const handleReset = () => {
+      navigate("/discovery");
+      window.location.reload();
+   };
    return (
       <Flex
          minH={"100vh"}
@@ -36,7 +42,12 @@ export const AccordionDiscover = ({
                width="100%"
                maxW="lg"
                rounded="lg"
-               defaultIndex={[0, 1]}>
+               defaultIndex={[1, 2]}>
+               <AccordionItem>
+                  <AccordionButton>
+                     <Text onClick={handleReset}>Reset Filter</Text>
+                  </AccordionButton>
+               </AccordionItem>
                <AccordionItem>
                   <AccordionButton
                      display="flex"
@@ -90,7 +101,9 @@ export const AccordionDiscover = ({
                               rounded={"5px"}
                               p={"8px"}
                               key={category.id}
-                              onClick={() => handleClickCategory(category.id)}>
+                              onClick={() => {
+                                 handleClickCategory(category.id);
+                              }}>
                               {category.category}
                            </Text>
                         ))}

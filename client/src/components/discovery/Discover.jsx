@@ -17,32 +17,65 @@ import {
 import { AccordionDiscover } from "./accordion";
 import UserLogin from "../UserLogin";
 import { FilterOption } from "./SelectOption";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import Card from "../homepage-component/Card";
 import EventCard from "./EventCard";
+import axios from "axios";
+import { eventsData, eventsDetail } from "../../redux/eventSlice";
+import { useNavigate } from "react-router-dom";
 
-export const Discovery = () => {
+export const Discovery = ({ isLoad, setIsLoad, getEvent }) => {
+   const dispatch = useDispatch();
    const country = useSelector((state) => state.country.value);
    const cities = useSelector((state) => state.cities.value);
    const category = useSelector((state) => state.category.value);
    const events = useSelector((state) => state.events.value);
-   const token = localStorage.getItem("token");
+   const userToken = localStorage.getItem("userToken");
    const [countryData, setCountryData] = useState(null);
-   const [categoryData, setcategoryData] = useState(null);
    const [filterLocation, setFilterLocation] = useState([]);
+   const [categoryData, setcategoryData] = useState(null);
    const [eventCard, setEventCard] = useState(null);
    const [filterEvents, setFilterEvents] = useState([]);
+   const [eventCategory, setEventCategory] = useState([]);
+   const navigate = useNavigate();
 
-   const handleCard = (eventId) => {
+   const handleCard = async (eventId) => {
       setEventCard(eventId);
+      try {
+         const result = await axios.get(
+            `http://localhost:2000/events/${eventId}`
+         );
+         // setIsLoad(false);
+         dispatch(eventsData(result.data.result));
+         navigate("/product-detail");
+         // window.location.reload();
+      } catch (error) {
+         console.log(error);
+      }
    };
 
-   const handleClick = (countryId) => {
+   const handleClick = async (countryId) => {
       setCountryData(countryId);
+      try {
+         const result = await axios.get(
+            `http://localhost:2000/events/country/${countryId}`
+         );
+         dispatch(eventsData(result.data.result));
+      } catch (error) {
+         console.log(error);
+      }
    };
-   const handleClickCategory = (categoryId) => {
+   const handleClickCategory = async (categoryId) => {
       setcategoryData(categoryId);
+      try {
+         const result = await axios.get(
+            `http://localhost:2000/events/category/${categoryId}`
+         );
+         dispatch(eventsData(result.data.result));
+      } catch (error) {
+         console.log(error);
+      }
    };
 
    const [value, setValue] = useState("");
@@ -61,6 +94,44 @@ export const Discovery = () => {
    };
    const displayedLocation = value.length > 0 ? filterLocation : country;
 
+   const [eventsValue, setEventsValue] = useState("");
+   const handleEvents = (e) => {
+      const searchEvent = e.target.value;
+      setEventsValue(searchEvent);
+
+      if (searchEvent === "") {
+         setFilterEvents([]);
+      } else {
+         const filteredEvents = events.filter((events) => {
+            const nameMatch = events.name
+               .toLowerCase()
+               .includes(searchEvent.toLowerCase());
+            const categoryMatch = events.Category.category
+               .toLowerCase()
+               .includes(searchEvent.toLowerCase());
+            const countryMatch = events.Country.country
+               .toLowerCase()
+               .includes(searchEvent.toLowerCase());
+            const descriptionsMatch = events.descriptions
+               .toLowerCase()
+               .includes(searchEvent.toLowerCase());
+            const cityMatch = events.City.city
+               .toLowerCase()
+               .includes(searchEvent.toLowerCase());
+
+            return (
+               nameMatch ||
+               categoryMatch ||
+               countryMatch ||
+               descriptionsMatch ||
+               cityMatch
+            );
+         });
+         setFilterEvents(filteredEvents);
+      }
+   };
+   const displayedEvents = eventsValue.length > 0 ? filterEvents : events;
+
    return (
       <Grid
          templateAreas={`"nav header"
@@ -73,27 +144,19 @@ export const Discovery = () => {
          color="blackAlpha.700">
          <GridItem p={"17px 0"} area={"header"}>
             <Flex
-               // borderBottom={"1px solid"}
+               borderBottom={"1px solid"}
                borderColor={"gray.200"}
                justifyContent={"space-between"}
                alignItems={"center"}
-               p={"0px 5%"}>
-               <HStack bg={"red"} alignItems={"center"}></HStack>
+               p={"0  5% 10px 5%"}>
                <HStack w={"500px"} alignItems={"center"}>
-                  <FilterOption />
+                  <FilterOption
+                     eventsValue={eventsValue}
+                     handleEvents={handleEvents}
+                  />
                </HStack>
                <Flex alignItems={"center"} gap={"20px"}>
-                  {!token ? (
-                     <>
-                        <UserLogin />
-                        <Link
-                           href="/userRegister"
-                           color={"gray.500"}
-                           fontSize={"14px"}>
-                           Register
-                        </Link>
-                     </>
-                  ) : (
+                  {userToken ? (
                      <Menu>
                         <VStack
                            display={{ base: "none", md: "flex" }}
@@ -116,11 +179,22 @@ export const Discovery = () => {
                            <MenuItem>Sign out</MenuItem>
                         </MenuList>
                      </Menu>
+                  ) : (
+                     <>
+                        <UserLogin />
+                        <Link
+                           href="/userRegister"
+                           color={"gray.500"}
+                           fontSize={"14px"}>
+                           Register
+                        </Link>
+                     </>
                   )}
                </Flex>
             </Flex>
          </GridItem>
          <GridItem
+            h={"100vh"}
             p={"20px 0"}
             area={"nav"}
             bg={useColorModeValue("gray.50", "gray.800")}>
@@ -132,6 +206,7 @@ export const Discovery = () => {
                Dofun
             </Heading>
             <AccordionDiscover
+               getEvent={getEvent}
                handleChange={handleChange}
                handleClick={handleClick}
                value={value}
@@ -147,7 +222,8 @@ export const Discovery = () => {
          <GridItem area={"main"} p={"5px 2%"}>
             <Flex gap={"2%"}>
                <EventCard
-                  events={events}
+                  isLoad={isLoad}
+                  events={displayedEvents}
                   category={category}
                   handleCard={handleCard}
                />

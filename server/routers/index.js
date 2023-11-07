@@ -11,6 +11,7 @@ const transactionRouter = require("./transactionRouter");
 const promotionRouter = require("./promotionRouter");
 
 module.exports = {
+  userRouter,
   countryRouter,
   cityRouter,
   userRouter,

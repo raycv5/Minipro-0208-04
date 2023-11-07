@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { setData } from "./redux/organizerSlice";
 import { login } from "./redux/userSlice";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import EventPage from "./pages/EventPage";
 import { OrganizerRegisterPage } from "./pages/OrganizerRegisterPage";
@@ -19,20 +19,64 @@ import { cityData } from "./redux/citySlice";
 import { countryData } from "./redux/countrySlice";
 import { categoryData } from "./redux/categorySlice";
 import { eventsData } from "./redux/eventSlice";
+import ProductDetail from "./components/event-details/ProductDetail";
 
 function App() {
-  const dispatch = useDispatch();
-  const Navigate = useNavigate();
-  const token = localStorage.getItem("token");
 
-  const getCountry = async () => {
-    try {
-      const country = await axios.get(`http://localhost:2000/countries`);
-      dispatch(countryData(country.data));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+   const dispatch = useDispatch();
+    const token = localStorage.getItem("token");
+   const Navigate = useNavigate();
+   const organizerToken = localStorage.getItem("organizerToken");
+   console.log(organizerToken);
+
+   const [isLoad, setIsLoad] = useState(true);
+
+   const getCountry = async () => {
+      try {
+         const country = await axios.get(`http://localhost:2000/countries`);
+         dispatch(countryData(country.data));
+      } catch (error) {
+         console.log(error);
+      }
+   };
+
+
+   const getEvent = async () => {
+      try {
+         const events = await axios.get(`http://localhost:2000/events`);
+         dispatch(eventsData(events.data.event));
+         setIsLoad(false);
+      } catch (error) {
+         console.log(error);
+         setIsLoad(true);
+      }
+   };
+
+   const getCity = async () => {
+      try {
+         const city = await axios.get(`http://localhost:2000/cities`);
+         dispatch(cityData(city.data));
+      } catch (error) {
+         console.log(error);
+      }
+   };
+
+   const keepLogin = async () => {
+      try {
+         const response = await axios.get(
+            `http://localhost:2000/organizers/keep-login`,
+            {
+               headers: {
+                  Authorization: `Bearer ${organizerToken}`,
+               },
+            }
+         );
+         console.log(response);
+         dispatch(setData(response.data.result));
+      } catch (err) {
+         console.log(err);
+      }
+   };
 
   const getCategory = async () => {
     try {
@@ -43,23 +87,6 @@ function App() {
     }
   };
 
-  const getEvent = async () => {
-    try {
-      const events = await axios.get(`http://localhost:2000/events`);
-      dispatch(eventsData(events.data.event));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const getCity = async () => {
-    try {
-      const city = await axios.get(`http://localhost:2000/cities`);
-      dispatch(cityData(city.data));
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const keepLogin = async () => {
     try {
@@ -76,8 +103,8 @@ function App() {
       console.log(err);
     }
   };
-
-  const keepLoginUser = async () => {
+  
+   const keepLoginUser = async () => {
     try {
       const response = await axios.get(
         `http://localhost:2000/users/keep-login`,
@@ -92,8 +119,8 @@ function App() {
       console.log(err);
     }
   };
-
-  useEffect(() => {
+  
+   useEffect(() => {
     keepLogin();
     getCity();
     getCountry();
@@ -102,33 +129,47 @@ function App() {
     keepLoginUser();
   }, []);
 
-  return (
-    <Routes>
-      <Route path="/" element={<HomePage />}></Route>
-      <Route path="/joinwithus" element={<EventPage />}></Route>
-      <Route path="/cart" element={<CartPage />}></Route>{" "}
-      <Route
-        path="/register/organizer"
-        element={<OrganizerRegisterPage />}
-      ></Route>
-      <Route
-        path="/buildyourpage"
-        element={
-          token ? <OrganizerDashboardPage /> : <Navigate to="/joinwithus" />
-        }
-      ></Route>
-      <Route path="/userRegister" element={<UserRegister />} />
-      <Route
+   return (
+      <Routes>
+         <Route path="/" element={<HomePage />}></Route>
+         <Route path="/joinwithus" element={<EventPage />}></Route>
+         <Route path="/cart" element={<CartPage />}></Route>{" "}
+         <Route
+            path="/register/organizer"
+            element={<OrganizerRegisterPage />}></Route>
+         <Route
+            path="/buildyourpage"
+            element={
+               organizerToken ? (
+                  <OrganizerDashboardPage />
+               ) : (
+                  <Navigate to="/joinwithus" />
+               )
+            }></Route>
+         <Route path="/userRegister" element={<UserRegister />} />
+         <Route
         path="/userDashboard"
         element={token ? <UserDashboard /> : <Navigate to="/" />}
       />
-      <Route path="/discovery" element={<DiscoveryPage />}></Route>
-      <Route path="/send-code" element={<SendCode />}></Route>
-      <Route path="/welcome-user" element={<UserDashboard />}></Route>
-      <Route path="/referral-content" element={<ReferralContent />}></Route>
-      <Route path="/user-event" element={<UserEvent />}></Route>
-    </Routes>
-  );
+         <Route
+            path="/discovery"
+            element={
+               <DiscoveryPage
+                  isLoad={isLoad}
+                  setIsload={setIsLoad}
+                  getEvent={getEvent}
+               />
+            }></Route>
+         <Route path="/send-code" element={<SendCode />}></Route>
+         <Route path="/welcome-user" element={<UserDashboard />}></Route>
+         <Route path="/referral-content" element={<ReferralContent />}></Route>
+         <Route path="/user-event" element={<UserEvent />}></Route>
+         <Route
+            path="/product-detail"
+            element={<ProductDetail isLoad={isLoad} />}></Route>
+      </Routes>
+   );
+
 }
 
 export default App;

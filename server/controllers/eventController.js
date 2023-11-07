@@ -3,7 +3,9 @@ const Event = db.Event;
 const Category = db.Category;
 const Organizer = db.Organizer;
 const Country = db.Country;
+const City = db.City;
 const fs = require("fs");
+const city = require("../models/city");
 
 module.exports = {
    getEvent: async (req, res) => {
@@ -11,8 +13,8 @@ module.exports = {
          const event = await Event.findAll({
             include: [
                {
-                  model:Country,
-                  attributes:['country']
+                  model: Country,
+                  attributes: ["country"],
                },
                {
                   model: Organizer,
@@ -21,6 +23,10 @@ module.exports = {
                {
                   model: Category,
                   attributes: ["category"],
+               },
+               {
+                  model: City,
+                  attributes: ["city"],
                },
             ],
          });
@@ -61,6 +67,103 @@ module.exports = {
             CategoryId,
             OrganizerId,
          });
+      } catch (error) {
+         console.log(error);
+         res.status(400).send({ message: error.message });
+      }
+   },
+
+   getById: async (req, res) => {
+      try {
+         const result = await Event.findOne({
+            where: {
+               id: req.params.id,
+            },
+            include: [
+               {
+                  model: Country,
+                  attributes: ["country"],
+               },
+               {
+                  model: Organizer,
+                  attributes: ["first_name", "last_name"],
+               },
+               {
+                  model: Category,
+                  attributes: ["category"],
+               },
+               {
+                  model: City,
+                  attributes: ["city"],
+               },
+            ],
+         });
+
+         res.status(200).send({ result });
+      } catch (error) {
+         console.log(error);
+         res.status(400).send({ message: error.message });
+      }
+   },
+   getByCategory: async (req, res) => {
+      try {
+         const result = await Event.findAll({
+            where: {
+               CategoryId: req.params.id,
+            },
+            include: [
+               {
+                  model: Country,
+                  attributes: ["country"],
+               },
+               {
+                  model: Organizer,
+                  attributes: ["first_name", "last_name"],
+               },
+               {
+                  model: Category,
+                  attributes: ["category"],
+               },
+               {
+                  model: City,
+                  attributes: ["city"],
+               },
+            ],
+         });
+
+         res.status(200).send({ result });
+      } catch (error) {
+         console.log(error);
+         res.status(400).send({ message: error.message });
+      }
+   },
+   getByCountry: async (req, res) => {
+      try {
+         const result = await Event.findAll({
+            where: {
+               CountryId: req.params.id,
+            },
+            include: [
+               {
+                  model: Country,
+                  attributes: ["country"],
+               },
+               {
+                  model: Organizer,
+                  attributes: ["first_name", "last_name"],
+               },
+               {
+                  model: Category,
+                  attributes: ["category"],
+               },
+               {
+                  model: City,
+                  attributes: ["city"],
+               },
+            ],
+         });
+
+         res.status(200).send({ result });
       } catch (error) {
          console.log(error);
          res.status(400).send({ message: error.message });

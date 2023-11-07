@@ -3,12 +3,15 @@ const jwt = require("jsonwebtoken");
 module.exports = {
    verifyToken: (req, res, next) => {
       try {
-         let token = req.headers.authorization;
-         if (!token) {
+         let organizerToken = req.headers.authorization;
+         if (!organizerToken) {
             return res.status(403).send({ message: "Token empty" });
          }
-         token = token.split(" ")[1];
-         let verifyOrganizer = jwt.verify(token, "MINIPROJECT_DATABASE");
+         organizerToken = organizerToken.split(" ")[1];
+         let verifyOrganizer = jwt.verify(
+            organizerToken,
+            "TOKEN_ORGANIZER"
+         );
          req.organizer = verifyOrganizer;
          next();
       } catch (error) {
