@@ -37,7 +37,13 @@ function EventDetail() {
               </Flex>
               <Flex flexDirection="row" alignItems="center" gap="2">
                 <AiFillCalendar color="gray" />
-                <Text>15 Dec 2023</Text>
+                <Text>
+                  {new Date(event.date).toLocaleString("en-US", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </Text>
               </Flex>
             </Box>
           </Stack>

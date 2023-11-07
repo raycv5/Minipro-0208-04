@@ -8,5 +8,6 @@ router.post("/", multerUpload().single("file"), eventController.registEvent);
 router.get("/:id", eventController.getById);
 router.get("/category/:id", eventController.getByCategory);
 router.get("/country/:id", eventController.getByCountry);
+router.get("/organizer/:id", eventController.getByOrganizerId);
 
 module.exports = router;
