@@ -4,6 +4,7 @@ const fs = require("fs");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const organizerTransporter = require("../middleware/organizerTransporter");
+const OrganizerWallet = db.Organizer_Wallet;
 
 module.exports = {
    getAll: async (req, res) => {
@@ -82,6 +83,12 @@ module.exports = {
             where: {
                id: req.organizer.id,
             },
+            include: [
+               {
+                  model: OrganizerWallet,
+                  attributes: ["balance"],
+               },
+            ],
          });
          res.status(200).send({ result });
       } catch (error) {

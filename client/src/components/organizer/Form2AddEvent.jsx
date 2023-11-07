@@ -4,14 +4,10 @@ import {
    FormLabel,
    InputGroup,
    InputLeftElement,
-   Box,
    Checkbox,
-   ScaleFade,
-   Collapse,
    useDisclosure,
    Stack,
 } from "@chakra-ui/react";
-import { useState } from "react";
 
 export const Form2 = ({ handleChange, values, ErrorMessage }) => {
    const { isOpen, onToggle } = useDisclosure();
