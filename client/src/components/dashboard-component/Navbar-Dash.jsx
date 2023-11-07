@@ -15,12 +15,10 @@ import {
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { FiBell, FiShoppingCart } from "react-icons/fi";
-import { HiOutlineTicket } from "react-icons/hi";
-import { PiTicketFill } from "react-icons/pi";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { LiaHomeSolid, LiaWalletSolid } from "react-icons/lia";
 import { FaCoins, FaWallet } from "react-icons/fa";
+import { AiFillPlusCircle } from "react-icons/ai";
 
 function NavbarDashboard() {
   const user = useSelector((state) => state.user.value);
@@ -36,8 +34,6 @@ function NavbarDashboard() {
   const handleHome = () => {
     navigate("/");
   };
-
-  console.log(user);
 
   return (
     <Flex
@@ -57,7 +53,16 @@ function NavbarDashboard() {
       </Flex>
 
       <Flex alignItems={"center"} justifyContent={"Center"} gap="24px">
-        <HStack>
+        <HStack
+          border="1px"
+          padding="2"
+          rounded="xl"
+          bgColor="gray.200"
+          borderColor="gray.200"
+          _hover={{
+            shadow: "md",
+          }}
+        >
           <Flex gap={"5px"} alignItems={"center"}>
             <FaCoins />
             <Text fontSize={"20px"} fontWeight={"500"}>
@@ -66,15 +71,26 @@ function NavbarDashboard() {
           </Flex>
         </HStack>
 
-        <HStack>
+        <HStack
+          border="1px"
+          padding="2"
+          rounded="xl"
+          bgColor="gray.200"
+          borderColor="gray.200"
+          _hover={{
+            shadow: "md",
+          }}
+          cursor="pointer"
+        >
           <Flex gap={"5px"} alignItems={"center"}>
             <FaWallet />
-            <Text fontSize={"20px"} fontWeight={"500"}>
+            <Text fontSize={"20px"} fontWeight={"500"} paddingRight="5px">
               {user.Wallet?.balance?.toLocaleString("id-ID", {
                 style: "currency",
                 currency: "IDR",
               })}
             </Text>
+            <AiFillPlusCircle />
           </Flex>
         </HStack>
 

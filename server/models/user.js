@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       User.hasOne(models.Referral);
       User.hasMany(models.Ticket);
       User.hasMany(models.Transaction);
+      User.hasMany(models.TopUp_Request);
     }
   }
   User.init(

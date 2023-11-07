@@ -30,6 +30,7 @@ const {
   transactionRouter,
   promotionRouter,
   ticketRouter,
+  topupRouter,
 } = require("./routers");
 
 app.use("/users", userRouter);
@@ -44,8 +45,9 @@ app.use("/events", eventRouter);
 app.use("/transactions", transactionRouter);
 app.use("/promotions", promotionRouter);
 app.use("/tickets", ticketRouter);
+app.use("/top-up-requests", topupRouter);
 
 app.listen(PORT, () => {
-  //  db.sequelize.sync({ alter: true });
+  // db.sequelize.sync({ alter: true });
   console.log(`Server running on PORT ${PORT}`);
 });
