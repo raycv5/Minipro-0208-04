@@ -10,6 +10,7 @@ const eventController = require("./eventController");
 const transactionController = require("./transactionController");
 const promotionController = require("./promotionController");
 const ticketController = require("./ticketController");
+const topupController = require("./topupController");
 
 module.exports = {
   countryController,
@@ -24,4 +25,5 @@ module.exports = {
   transactionController,
   promotionController,
   ticketController,
+  topupController,
 };
