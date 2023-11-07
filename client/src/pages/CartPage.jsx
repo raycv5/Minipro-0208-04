@@ -11,8 +11,13 @@ import axios from "axios";
 
 function CartPage() {
   const user = useSelector((state) => state.user.value);
-  const eventData = localStorage.getItem("checkoutItem");
-  const event = JSON.parse(eventData);
+  const event = useSelector((state) => state.checkout.value);
+
+  console.log(event);
+
+  // const eventData = localStorage.getItem("checkoutItem");
+  // const event = JSON.parse(eventData);
+
   const navigate = useNavigate();
 
   const [transaction, setTransaction] = useState({
@@ -25,12 +30,12 @@ function CartPage() {
 
   console.log(transaction);
 
-  useEffect(() => {
-    setTransaction((prevTransaction) => ({
-      ...prevTransaction,
-      UserId: user.id,
-    }));
-  }, [user.id]);
+  // useEffect(() => {
+  //   setTransaction((prevTransaction) => ({
+  //     ...prevTransaction,
+  //     UserId: user.id,
+  //   }));
+  // }, [user.id]);
 
   const handlePaymentMethod = (paymentMethodId) => {
     setTransaction((prevValue) => ({
