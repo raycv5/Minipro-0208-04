@@ -10,6 +10,7 @@ const eventRouter = require("./eventRouter");
 const transactionRouter = require("./transactionRouter");
 const promotionRouter = require("./promotionRouter");
 const ticketRouter = require("./ticketRouter");
+const topupRouter = require("./topupRouter");
 
 module.exports = {
   userRouter,
@@ -25,4 +26,5 @@ module.exports = {
   transactionRouter,
   promotionRouter,
   ticketRouter,
+  topupRouter,
 };

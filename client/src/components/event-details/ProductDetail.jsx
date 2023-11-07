@@ -63,7 +63,9 @@ export default function ProductDetail({ isLoad }) {
                <HStack alignItems={"center"}>
                   <Heading
                      as={"a"}
+
                      href="/"
+
                      textColor="green.400"
                      textAlign={"center"}
                      fontSize={{ base: "14px", md: "20px" }}
@@ -184,13 +186,17 @@ export default function ProductDetail({ isLoad }) {
                            <SimpleGrid
                               columns={{ base: 1, md: 2 }}
                               spacing={10}>
+
                               <List spacing={4}>
+
                                  <ListItem>Category</ListItem>
                                  <ListItem>Location</ListItem>{" "}
                                  <ListItem>Date</ListItem>
                                  <ListItem>Ticket amount</ListItem>
                               </List>
+
                               <List spacing={4}>
+
                                  <ListItem>
                                     : {events.Category.category}
                                  </ListItem>
@@ -203,12 +209,14 @@ export default function ProductDetail({ isLoad }) {
                                     {new Date(events.date).toLocaleString(
                                        "en-US",
                                        {
+
                                           weekday: "long",
                                           day: "numeric",
                                           month: "long",
                                           year: "numeric",
                                           hour: "2-digit",
                                           minute: "2-digit",
+
                                        }
                                     )}
                                  </ListItem>

@@ -14,6 +14,7 @@ import CartPage from "./pages/CartPage";
 import SendCode from "./components/dashboard-component/SendcodeContent";
 import ReferralContent from "./components/dashboard-component/ReferralContent";
 import UserEvent from "./components/dashboard-component/UserEventContent";
+import UserWallet from "./components/dashboard-component/UserWallet";
 import { DiscoveryPage } from "./pages/discoveryPage";
 import { cityData } from "./redux/citySlice";
 import { countryData } from "./redux/countrySlice";
@@ -147,6 +148,7 @@ function App() {
       <Route path="/welcome-user" element={<UserDashboard />}></Route>
       <Route path="/referral-content" element={<ReferralContent />}></Route>
       <Route path="/user-event" element={<UserEvent />}></Route>
+      <Route path="/wallet" element={<UserWallet />}></Route>
       <Route
         path="/product-detail"
         element={<ProductDetail isLoad={isLoad} />}

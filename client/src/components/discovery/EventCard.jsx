@@ -71,6 +71,7 @@ export default function EventCard({ events, handleCard, isLoad }) {
                               </Text>
                               <Text fontWeight="bold">{event.name}</Text>
                               <Text fontWeight="thin">
+
                                  {new Date(event.date).toLocaleString("GMT", {
                                     weekday: "short",
                                     day: "numeric",
@@ -79,10 +80,12 @@ export default function EventCard({ events, handleCard, isLoad }) {
                                     hour: "2-digit",
                                     minute: "2-digit",
                                  })}
+
                               </Text>
                            </SkeletonText>
                         </Stack>
                         <Box>
+
                            {!event.price == 0 ? (
                               <Text>
                                  From{" "}
@@ -101,6 +104,7 @@ export default function EventCard({ events, handleCard, isLoad }) {
                                  </Text>
                               </Text>
                            )}
+
                            <SkeletonText
                               noOfLines={4}
                               spacing="4"

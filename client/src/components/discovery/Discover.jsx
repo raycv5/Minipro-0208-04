@@ -39,6 +39,7 @@ export const Discovery = ({ isLoad, setIsLoad, getEvent }) => {
    const [filterEvents, setFilterEvents] = useState([]);
    const navigate = useNavigate();
 
+
    const handleCard = async (eventId) => {
       setEventCard(eventId);
       try {

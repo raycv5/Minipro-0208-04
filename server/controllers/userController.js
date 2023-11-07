@@ -154,7 +154,7 @@ module.exports = {
       }
 
       const payload = { id: isUserExist.id };
-      const token = jwt.sign(payload, "JCWD0208", { expiresIn: "1h" });
+      const token = jwt.sign(payload, "JCWD0208", { expiresIn: "10h" });
 
       res.status(200).send({
         message: "Login Success",
