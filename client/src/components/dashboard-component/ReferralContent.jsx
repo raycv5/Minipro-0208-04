@@ -14,13 +14,14 @@ import { Link } from "react-router-dom";
 import NavbarDashboard from "./Navbar-Dash";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { FaWallet } from "react-icons/fa";
 
 const flexStyle = {
   alignItems: "center",
   gap: "10px",
   cursor: "pointer",
   p: "5px",
-  _hover: { bg: "blue.400", color: "white", borderRadius: "5px" },
+  _hover: { bg: "green.400", color: "white", borderRadius: "5px" },
 };
 
 const ReferralContent = () => {
@@ -84,7 +85,7 @@ const ReferralContent = () => {
         {/* <GridItem h="100vh"><Sidebar/></GridItem> */}
         <Flex flexDir={"column"} m={"10px 10px"} gap={"30px"} fontSize={"20px"}>
           <Text fontWeight={500} ml={"5px"} mt={"20px"}>
-            Dashboard
+            DASHBOARD
           </Text>
           <Flex {...flexStyle}>
             <Icon as={Avatar} boxSize={"20px"} />
@@ -94,8 +95,17 @@ const ReferralContent = () => {
           </Flex>
 
           <Flex {...flexStyle}>
+            <Icon as={FaWallet} boxSize={"25px"} />
+            <Link to="/wallet">
+              <Text>Wallet</Text>
+            </Link>
+          </Flex>
+
+          <Flex {...flexStyle}>
             <Icon as={PiTicketFill} boxSize={"25px"} />
-            <Text>Referral Code</Text>
+            <Link to="/referral-content">
+              <Text>Referral Code</Text>
+            </Link>
           </Flex>
 
           <Flex {...flexStyle}>
@@ -107,9 +117,7 @@ const ReferralContent = () => {
 
           <Flex {...flexStyle}>
             <Icon as={MdEventNote} boxSize={"25px"} />
-            <Link to="/user-event">
-              <Text>Your Event</Text>
-            </Link>
+            <Text>Your Event</Text>
           </Flex>
         </Flex>
 

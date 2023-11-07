@@ -38,7 +38,7 @@ const flexStyle = {
   gap: "10px",
   cursor: "pointer",
   p: "5px",
-  _hover: { bg: "blue.400", color: "white", borderRadius: "5px" },
+  _hover: { bg: "green.400", color: "white", borderRadius: "5px" },
 };
 
 function UserWallet() {
