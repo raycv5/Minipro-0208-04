@@ -71,20 +71,40 @@ export default function EventCard({ events, handleCard, isLoad }) {
                               </Text>
                               <Text fontWeight="bold">{event.name}</Text>
                               <Text fontWeight="thin">
-                                 {event.descriptions}
+
+                                 {new Date(event.date).toLocaleString("GMT", {
+                                    weekday: "short",
+                                    day: "numeric",
+                                    month: "short",
+                                    year: "numeric",
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                 })}
+
                               </Text>
                            </SkeletonText>
                         </Stack>
                         <Box>
-                           <Text>
-                              From{" "}
-                              <Text as="span" fontWeight="bold">
-                                 {event.price.toLocaleString("id-ID", {
-                                    style: "currency",
-                                    currency: "IDR",
-                                 })}
+
+                           {!event.price == 0 ? (
+                              <Text>
+                                 From{" "}
+                                 <Text as="span" fontWeight="bold">
+                                    {event.price.toLocaleString("id-ID", {
+                                       style: "currency",
+                                       currency: "IDR",
+                                    })}
+                                 </Text>
                               </Text>
-                           </Text>
+                           ) : (
+                              <Text>
+                                 From{" "}
+                                 <Text as="span" fontWeight="bold">
+                                    FREE
+                                 </Text>
+                              </Text>
+                           )}
+
                            <SkeletonText
                               noOfLines={4}
                               spacing="4"
