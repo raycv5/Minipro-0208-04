@@ -1,5 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
+const { Wallet } = require("./wallet");
+const { Referral } = require("./referral");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -35,9 +37,13 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      point: {
+      points: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
+      },
+      referrals: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
     },
     {
@@ -45,5 +51,47 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
     }
   );
+
+  User.afterCreate(async (user) => {
+    const generateReferralCode = async () => {
+      const characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      const codeLength = 8;
+
+      let referralCode = "";
+
+      while (true) {
+        for (let i = 0; i < codeLength; i++) {
+          const randomIndex = Math.floor(Math.random() * characters.length);
+          referralCode += characters.charAt(randomIndex);
+        }
+
+        const existingReferral = await sequelize.models.Referral.findOne({
+          where: { referral_code: referralCode },
+        });
+
+        if (!existingReferral) {
+          break;
+        }
+
+        referralCode = "";
+      }
+
+      return referralCode;
+    };
+
+    const wallet = await sequelize.models.Wallet.create({
+      UserId: user.id,
+      balance: 0,
+    });
+
+    const referralCode = await generateReferralCode();
+
+    const referral = await sequelize.models.Referral.create({
+      UserId: user.id,
+      referral_code: referralCode,
+    });
+  });
+
   return User;
 };

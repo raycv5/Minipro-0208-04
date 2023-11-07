@@ -113,4 +113,4 @@ export default function EventCard({ events, handleCard, isLoad }) {
          )} 
       </>
    );
-}
+

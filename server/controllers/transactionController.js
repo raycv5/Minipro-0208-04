@@ -29,7 +29,7 @@ module.exports = {
       console.log(price);
 
       // Check if user use a point promotion
-      if (PointDiscountId !== undefined) {
+      if (PointDiscountId !== null) {
         const pointDiscounted = await Point_Discount.findOne({
           where: {
             id: Number(PointDiscountId),
@@ -61,7 +61,7 @@ module.exports = {
 
       //Check if user use a promotion code
       let promotionId;
-      if (promotion_code !== undefined) {
+      if (promotion_code !== "") {
         const promotionCode = await Promotion_Code.findOne({
           where: {
             code: promotion_code,

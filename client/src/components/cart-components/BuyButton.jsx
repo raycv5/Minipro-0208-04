@@ -1,6 +1,10 @@
 import { Box, Button, Text } from "@chakra-ui/react";
 
-function BuyButton() {
+function BuyButton({ onSubmit }) {
+  const handleSubmit = () => {
+    onSubmit();
+  };
+
   return (
     <Box
       padding={"5% 8%"}
@@ -15,7 +19,9 @@ function BuyButton() {
         bgColor="green.400"
         _hover={{ bgColor: "green.300" }}
       >
-        <Text textColor="white">Buy Ticket</Text>
+        <Text textColor="white" onClick={handleSubmit}>
+          Buy Ticket
+        </Text>
       </Button>
     </Box>
   );

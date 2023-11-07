@@ -22,8 +22,9 @@ import { eventsData } from "./redux/eventSlice";
 import ProductDetail from "./components/event-details/ProductDetail";
 
 function App() {
+
    const dispatch = useDispatch();
-   const id = localStorage.getItem("id");
+    const token = localStorage.getItem("token");
    const Navigate = useNavigate();
    const organizerToken = localStorage.getItem("organizerToken");
    console.log(organizerToken);
@@ -39,14 +40,6 @@ function App() {
       }
    };
 
-   const getCategory = async () => {
-      try {
-         const category = await axios.get(`http://localhost:2000/category`);
-         dispatch(categoryData(category.data));
-      } catch (error) {
-         console.log(error);
-      }
-   };
 
    const getEvent = async () => {
       try {
@@ -84,25 +77,57 @@ function App() {
          console.log(err);
       }
    };
-   useEffect(() => {
-      keepLogin();
-      getCity();
-      getCountry();
-      getCategory();
-      getEvent();
-   }, []);
 
+  const getCategory = async () => {
+    try {
+      const category = await axios.get(`http://localhost:2000/category`);
+      dispatch(categoryData(category.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+  const keepLogin = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:2000/organizers/keep-login`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(setData(response.data.result));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
    const keepLoginUser = async () => {
-      try {
-         const response = await axios.get(`http://localhost:2000/users/${id}`);
-         dispatch(login(response.data));
-      } catch (err) {
-         console.log(err);
-      }
-   };
+    try {
+      const response = await axios.get(
+        `http://localhost:2000/users/keep-login`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(login(response.data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
    useEffect(() => {
-      keepLoginUser();
-   }, [dispatch]);
+    keepLogin();
+    getCity();
+    getCountry();
+    getCategory();
+    getEvent();
+    keepLoginUser();
+  }, []);
 
    return (
       <Routes>
@@ -123,9 +148,9 @@ function App() {
             }></Route>
          <Route path="/userRegister" element={<UserRegister />} />
          <Route
-            path="/userDashboard"
-            element={id ? <UserDashboard /> : <Navigate to="/" />}
-         />
+        path="/userDashboard"
+        element={token ? <UserDashboard /> : <Navigate to="/" />}
+      />
          <Route
             path="/discovery"
             element={
@@ -144,6 +169,7 @@ function App() {
             element={<ProductDetail isLoad={isLoad} />}></Route>
       </Routes>
    );
+
 }
 
 export default App;
