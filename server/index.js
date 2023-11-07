@@ -29,6 +29,7 @@ const {
   eventRouter,
   transactionRouter,
   promotionRouter,
+  ticketRouter,
 } = require("./routers");
 
 app.use("/users", userRouter);
@@ -42,6 +43,7 @@ app.use("/point-discounts", pointRouter);
 app.use("/events", eventRouter);
 app.use("/transactions", transactionRouter);
 app.use("/promotions", promotionRouter);
+app.use("/tickets", ticketRouter);
 
 app.listen(PORT, () => {
   //  db.sequelize.sync({ alter: true });

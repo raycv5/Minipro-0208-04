@@ -9,6 +9,7 @@ const pointController = require("./pointController");
 const eventController = require("./eventController");
 const transactionController = require("./transactionController");
 const promotionController = require("./promotionController");
+const ticketController = require("./ticketController");
 
 module.exports = {
   countryController,
@@ -22,4 +23,5 @@ module.exports = {
   eventController,
   transactionController,
   promotionController,
+  ticketController,
 };

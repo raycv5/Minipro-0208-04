@@ -1,10 +1,12 @@
 import { Box, Flex, Image, Stack, Text } from "@chakra-ui/react";
 import { HiLocationMarker } from "react-icons/hi";
 import { AiFillCalendar } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 function EventDetail() {
-  const eventData = localStorage.getItem("checkoutItem");
-  const event = JSON.parse(eventData);
+  const event = useSelector((state) => state.checkout.value);
+
+  console.log(event.date);
 
   return (
     <Box

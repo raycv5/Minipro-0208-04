@@ -15,8 +15,7 @@ import { useDisclosure } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 
 function PriceDetails({ onCodeChange, onPointPromotionChange }) {
-  const eventData = localStorage.getItem("checkoutItem");
-  const event = JSON.parse(eventData);
+  const event = useSelector((state) => state.checkout.value);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [pointDiscount, setPointDiscount] = useState([]);
@@ -27,7 +26,6 @@ function PriceDetails({ onCodeChange, onPointPromotionChange }) {
 
   const user = useSelector((state) => state.user.value);
   const toast = useToast();
-  console.log(user);
 
   const getPointDiscount = async () => {
     const response = await axios.get("http://localhost:2000/point-discounts");
@@ -120,7 +118,7 @@ function PriceDetails({ onCodeChange, onPointPromotionChange }) {
         paddingY="10px"
       >
         <Text>Total</Text>
-        <Text>${price}</Text>
+        <Text>Rp.{price}</Text>
       </Flex>
 
       <Box marginBottom="10px">

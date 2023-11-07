@@ -47,7 +47,7 @@ const UserLogin = () => {
       );
       dispatch(login(response.data));
       localStorage.setItem("token", response.data.token);
-      navigate("/");
+      navigate("/discovery");
       window.location.reload();
     } catch (err) {
       console.log(err);
