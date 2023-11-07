@@ -172,6 +172,12 @@ module.exports = {
         where: {
           id: req.user.id,
         },
+        include: [
+          {
+            model: Wallet,
+            attributes: ["balance"],
+          },
+        ],
       });
       res.status(200).send(result);
     } catch (err) {

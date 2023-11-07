@@ -3,6 +3,9 @@ import { HiLocationMarker } from "react-icons/hi";
 import { AiFillCalendar } from "react-icons/ai";
 
 function EventDetail() {
+  const eventData = localStorage.getItem("checkoutItem");
+  const event = JSON.parse(eventData);
+
   return (
     <Box
       padding={"5% 8%"}
@@ -16,7 +19,7 @@ function EventDetail() {
       <Stack direction="row" spacing="3">
         <Box>
           <Image
-            src="https://res.klook.com/image/upload/fl_lossy.progressive,w_500,h_334,c_fill,q_85/activities/l3lgxtpjczfm1kxivzea.webp"
+            src={`http://localhost:2000/${event.image}`}
             boxSize="150px"
             objectFit="cover"
             rounded="xl"
@@ -24,11 +27,11 @@ function EventDetail() {
         </Box>
         <Flex flexDirection="column" justifyContent="space-between">
           <Stack spacing="3">
-            <Text fontWeight="bold">Ocean Park Hong Kong Ticket</Text>
+            <Text fontWeight="bold">{event.name}</Text>
             <Box>
               <Flex flexDirection="row" alignItems="center" gap="2">
                 <HiLocationMarker color="gray" />
-                <Text>Hong Kong</Text>
+                <Text>{event.Country.country}</Text>
               </Flex>
               <Flex flexDirection="row" alignItems="center" gap="2">
                 <AiFillCalendar color="gray" />
