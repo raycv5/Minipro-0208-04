@@ -1,7 +1,7 @@
 const countryController = require("./countryController");
 const cityController = require("./cityController");
-const userController = require("./userController");
-const referralController = require("./referralController");
+// const userController = require("./userController");
+// const referralController = require("./referralController");
 const walletController = require("./walletController");
 const categoryController = require("./categoryController");
 const organizerController = require("./organizerController");
@@ -14,8 +14,8 @@ const promotionController = require("./promotionController");
 module.exports = {
   countryController,
   cityController,
-  userController,
-  referralController,
+  // userController,
+  // referralController,
   walletController,
   categoryController,
   organizerController,

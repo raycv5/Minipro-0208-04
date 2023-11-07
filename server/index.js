@@ -32,11 +32,11 @@ const {
   promotionRouter,
 } = require("./routers");
 
-app.use("/users", userRouter);
+// app.use("/users", userRouter);
 app.use("/countries", countryRouter);
 app.use("/cities", cityRouter);
 app.use("/wallets", walletRouter);
-app.use("/referrals", referralRouter);
+// app.use("/referrals", referralRouter);
 app.use("/category", categoryRouter);
 app.use("/organizers", organizerRouter);
 app.use("/payment-methods", paymentRouter);

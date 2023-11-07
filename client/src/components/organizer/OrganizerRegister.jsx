@@ -51,7 +51,6 @@ export const OrganizerRegister = () => {
             "http://localhost:2000/organizers",
             data
          );
-         console.log(response.data);
          toast({
             title: "Registerd",
             description: "Your are regist..!!",
@@ -60,19 +59,18 @@ export const OrganizerRegister = () => {
             position: "top-left",
             isClosable: true,
          });
+         navigate("/joinwithus");
       } catch (err) {
          console.log(err);
          toast({
             title: "Error",
-            description: { err },
-            status: "danger",
-            duration: 5000,
+            description: `${err.response.data.message}`,
+            status: "error",
+            duration: 3000,
             position: "top-left",
             isClosable: true,
          });
       }
-
-      navigate("/joinwithus");
    };
 
    return (

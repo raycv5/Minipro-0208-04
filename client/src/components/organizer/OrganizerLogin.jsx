@@ -46,8 +46,8 @@ export const EventLogin = () => {
          const response = await axios.get(
             `http://localhost:2000/organizers/login?email=${data.email}&password=${data.password}`
          );
-         if (response.data.token) {
-            localStorage.setItem("token", response.data.token);
+         if (response.data.organizerToken) {
+            localStorage.setItem("organizerToken", response.data.organizerToken);
             toast({
                title: "success",
                description: "Your are Login..!!",
@@ -58,18 +58,17 @@ export const EventLogin = () => {
             });
             navigate("/buildyourpage");
             window.location.reload();
-         } else {
-            toast({
-               title: "Error",
-               description: "Account not found.",
-               status: "error",
-               duration: 3000,
-               position: "top-left",
-               isClosable: true,
-            });
          }
       } catch (err) {
          console.log(err);
+         toast({
+            title: "Error",
+            description: `${err.response.data.message}`,
+            status: "error",
+            duration: 3000,
+            position: "top-left",
+            isClosable: true,
+         });
       }
    };
 

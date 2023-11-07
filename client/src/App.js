@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { setData } from "./redux/organizerSlice";
 import { login } from "./redux/userSlice";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import EventPage from "./pages/EventPage";
 import { OrganizerRegisterPage } from "./pages/OrganizerRegisterPage";
@@ -19,16 +19,20 @@ import { cityData } from "./redux/citySlice";
 import { countryData } from "./redux/countrySlice";
 import { categoryData } from "./redux/categorySlice";
 import { eventsData } from "./redux/eventSlice";
+import ProductDetail from "./components/event-details/ProductDetail";
 
 function App() {
    const dispatch = useDispatch();
    const id = localStorage.getItem("id");
    const Navigate = useNavigate();
-   const token = localStorage.getItem("token");
-   console.log(token);
+   const organizerToken = localStorage.getItem("organizerToken");
+   console.log(organizerToken);
+
+   const [isLoad, setIsLoad] = useState(true);
+
    const getCountry = async () => {
       try {
-         const country = await axios.get(`http://localhost:2000/country`);
+         const country = await axios.get(`http://localhost:2000/countries`);
          dispatch(countryData(country.data));
       } catch (error) {
          console.log(error);
@@ -48,14 +52,16 @@ function App() {
       try {
          const events = await axios.get(`http://localhost:2000/events`);
          dispatch(eventsData(events.data.event));
+         setIsLoad(false);
       } catch (error) {
          console.log(error);
+         setIsLoad(true);
       }
    };
 
    const getCity = async () => {
       try {
-         const city = await axios.get(`http://localhost:2000/city`);
+         const city = await axios.get(`http://localhost:2000/cities`);
          dispatch(cityData(city.data));
       } catch (error) {
          console.log(error);
@@ -68,10 +74,11 @@ function App() {
             `http://localhost:2000/organizers/keep-login`,
             {
                headers: {
-                  Authorization: `Bearer ${token}`,
+                  Authorization: `Bearer ${organizerToken}`,
                },
             }
          );
+         console.log(response);
          dispatch(setData(response.data.result));
       } catch (err) {
          console.log(err);
@@ -108,7 +115,7 @@ function App() {
          <Route
             path="/buildyourpage"
             element={
-               token ? (
+               organizerToken ? (
                   <OrganizerDashboardPage />
                ) : (
                   <Navigate to="/joinwithus" />
@@ -119,11 +126,22 @@ function App() {
             path="/userDashboard"
             element={id ? <UserDashboard /> : <Navigate to="/" />}
          />
-         <Route path="/discovery" element={<DiscoveryPage />}></Route>
+         <Route
+            path="/discovery"
+            element={
+               <DiscoveryPage
+                  isLoad={isLoad}
+                  setIsload={setIsLoad}
+                  getEvent={getEvent}
+               />
+            }></Route>
          <Route path="/send-code" element={<SendCode />}></Route>
          <Route path="/welcome-user" element={<UserDashboard />}></Route>
          <Route path="/referral-content" element={<ReferralContent />}></Route>
          <Route path="/user-event" element={<UserEvent />}></Route>
+         <Route
+            path="/product-detail"
+            element={<ProductDetail isLoad={isLoad} />}></Route>
       </Routes>
    );
 }

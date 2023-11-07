@@ -68,10 +68,9 @@ export const RegisterEvent = () => {
             "http://localhost:2000/events",
             formData
          );
-         console.log(response.data);
          toast({
             title: "Registerd",
-            description: "Your are regist..!!",
+            description: "Event has been regist..!!",
             status: "success",
             duration: 5000,
             position: "top-left",
@@ -79,9 +78,15 @@ export const RegisterEvent = () => {
          });
       } catch (err) {
          console.log(err);
+         toast({
+            title: "Error",
+            description: `${err.response.data.message}`,
+            status: "error",
+            duration: 3000,
+            position: "top-left",
+            isClosable: true,
+         });
       }
-
-      console.log(data);
    };
    return (
       <Box p={{ base: "0" }}>
