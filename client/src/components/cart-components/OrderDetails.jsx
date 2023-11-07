@@ -27,7 +27,11 @@ function OrderDetails() {
   const handleCheckChange = (e) => {
     setUsePersonalInfo(e.target.checked);
     if (e.target.checked) {
-      setUser({ name: users.name, email: users.email, phone: user.phone });
+      setUser({
+        name: users.first_name,
+        email: users.email,
+        phone: user.phone,
+      });
       console.log(user);
     }
   };
@@ -56,7 +60,7 @@ function OrderDetails() {
               <FormLabel>Full Name</FormLabel>
               <Input
                 type="text"
-                value={usePersonalInfo ? users.name : user.name}
+                value={usePersonalInfo ? users.first_name : user.name}
                 onChange={(e) => setUser({ ...user, name: e.target.value })}
                 isDisabled={usePersonalInfo}
               />

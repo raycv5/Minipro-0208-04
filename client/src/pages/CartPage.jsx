@@ -4,19 +4,63 @@ import PriceDetails from "../components/cart-components/PriceDetails";
 import OrderDetails from "../components/cart-components/OrderDetails";
 import PaymentMethods from "../components/cart-components/PaymentMethods";
 import BuyButton from "../components/cart-components/BuyButton";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function CartPage() {
-  const [data, setData] = useState({
-    date: "",
-    event_id: "",
-    event_name: "",
-    user_id: "",
-    user_name: "",
-    payment_method: 0,
-    discount: 0,
-    isSuccess: false,
+  const user = useSelector((state) => state.user.value);
+  const eventData = localStorage.getItem("checkoutItem");
+  const event = JSON.parse(eventData);
+  const navigate = useNavigate();
+
+  const [transaction, setTransaction] = useState({
+    EventId: event.id,
+    UserId: user.id,
+    PaymentMethodId: 1,
+    PointDiscountId: null,
+    promotion_code: "",
   });
+
+  console.log(transaction);
+
+  useEffect(() => {
+    setTransaction((prevTransaction) => ({
+      ...prevTransaction,
+      UserId: user.id,
+    }));
+  }, [user.id]);
+
+  const handlePaymentMethod = (paymentMethodId) => {
+    setTransaction((prevValue) => ({
+      ...prevValue,
+      PaymentMethodId: paymentMethodId,
+    }));
+  };
+
+  const handlePromotionCode = (promotionCode) => {
+    setTransaction((prevValue) => ({
+      ...prevValue,
+      promotion_code: promotionCode,
+    }));
+  };
+
+  const handlePointPromotion = (promotionId) => {
+    setTransaction((prevValue) => ({
+      ...prevValue,
+      PointDiscountId: promotionId,
+    }));
+  };
+
+  const handleSubmit = async () => {
+    try {
+      await axios.post("http://localhost:2000/transactions", transaction);
+      navigate("/user-event");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Box bgColor={{ base: "gray.200", lg: "white" }} padding={{ lg: "3% 12%" }}>
@@ -40,11 +84,14 @@ function CartPage() {
         <Box flex={{ lg: 1 }}>
           <EventDetail />
           <OrderDetails />
-          <PaymentMethods />
+          <PaymentMethods onPaymentMethod={handlePaymentMethod} />
         </Box>
         <Box flex={{ lg: 1 }} maxWidth={{ lg: "md" }}>
-          <PriceDetails />
-          <BuyButton />
+          <PriceDetails
+            onCodeChange={handlePromotionCode}
+            onPointPromotionChange={handlePointPromotion}
+          />
+          <BuyButton onSubmit={handleSubmit} />
         </Box>
       </Flex>
     </Box>
